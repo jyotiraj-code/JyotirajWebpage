@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dossier &amp; Executive Ledger // JYOTIRAJ NATH ARCHIVE</title>
+    <meta name="description" content="Academic portfolio and archival documentation system for Jyotiraj (Raj) Nath, Computational Quantum Physicist and Open-Source Julia Developer." />
+    <meta name="author" content="Jyotiraj (Raj) Nath" />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="phosphor"]'],
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                bg: '#F5F2EB',
+                subtle: '#EDE8DE',
+                card: '#FAF8F5',
+                carbon: '#1A1A1C',
+                pencil: '#D1CBBF',
+                margin: '#8C857B',
+                red: '#942A27',
+                blue: '#1D4ED8',
+                green: '#2D5A27',
+              },
+              terminal: {
+                bg: '#0F0F10',
+                subtle: '#18181A',
+                fg: '#E2E0D8',
+                muted: '#6B7280',
+                wire: '#28282C',
+                amber: '#D97706',
+                phosphor: '#059669',
+                crimson: '#DC2626',
+                cyan: '#0284C7',
+              }
+            },
+            fontFamily: {
+              mono: ['"Courier Prime"', '"IBM Plex Mono"', '"Space Mono"', 'monospace'],
+              serif: ['Newsreader', '"EB Garamond"', 'serif'],
+            },
+            letterSpacing: {
+              typewriter: '0.08em',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <script>
+      const savedTheme = localStorage.getItem('jyotiraj_archival_theme');
+      if (savedTheme === 'phosphor') {
+        document.documentElement.setAttribute('data-theme', 'phosphor');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- TOP HEADER DOCKET -->
+    <header class="w-full border-b border-paper-pencil dark:border-terminal-wire bg-paper-bg dark:bg-terminal-bg relative z-20 mb-8">
+      <div class="site-container py-3 border-b border-paper-pencil dark:border-terminal-wire">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs font-mono">
+          <div>
+            <div class="font-bold text-sm tracking-typewriter text-paper-carbon dark:text-terminal-fg flex items-center gap-2">
+              <span>JYOTIRAJ (RAJ) NATH</span>
+              <span class="opacity-40">//</span>
+              <span class="text-paper-red dark:text-terminal-amber">DOC-ID: JN-MASSEY-PHYS</span>
+              <span class="hidden sm:inline-block stamp stamp-verified text-[10px] py-0 px-1.5">[CONVERGED]</span>
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-0.5">
+              Doctoral Researcher, Theoretical &amp; Computational Physics &bull; Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Research Group
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 text-[11px]">
+            <div class="stamp stamp-archived" id="nzstClock">
+              2026-09-12 23:15:00 NZST
+            </div>
+            <div class="stamp stamp-archived hidden sm:inline-flex">
+              rev: <span class="text-paper-red dark:text-terminal-amber">ffe919f</span>
+            </div>
+            <div class="stamp stamp-archived" id="sessionUptime">
+              UPTIME: 00:00:00
+            </div>
+            <button id="cmdSearchTrigger" class="btn-brutalist text-[10px] py-1 px-2" title="Shortcut: Cmd+K">
+              [⌘K INDEX]
+            </button>
+            <button id="themeToggleBtn" class="btn-brutalist text-[10px] py-1 px-2">
+              MODE: [ARCHIVAL PAPER]
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOG NAVIGATION TABS -->
+      <nav class="site-container overflow-x-auto">
+        <div class="flex border-l border-paper-pencil dark:border-terminal-wire">
+          <a href="/" class="nav-tab active"><span class="opacity-50 text-[10px] mr-1.5">[01/</span><span>DOSSIER]</span></a>
+          <a href="/research/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[02/</span><span>RESEARCH]</span></a>
+          <a href="/code/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[03/</span><span>COMPUTATION]</span></a>
+          <a href="/learnings/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[04/</span><span>LEDGER]</span></a>
+          <a href="/essays/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[05/</span><span>ESSAYS]</span></a>
+          <a href="/archive/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[06/</span><span>ARCHIVE]</span></a>
+          <a href="/colophon/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[07/</span><span>COLOPHON]</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-container flex-grow pb-16">
+      <!-- DOSSIER HERO GRID -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+        <!-- LEFT: EXECUTIVE LEDGER SUMMARY -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          <div class="ledger-box p-6 md:p-8">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-6">
+              <span class="stamp stamp-verified">[INDEX ENTRY: JN-01]</span>
+              <span class="text-xs font-mono text-paper-margin dark:text-terminal-muted">LOC: AUCKLAND, NZ (UTC+12)</span>
+            </div>
+
+            <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter mb-3 text-paper-carbon dark:text-terminal-fg">
+              JYOTIRAJ (RAJ) NATH
+            </h1>
+            <div class="text-sm font-mono text-paper-red dark:text-terminal-amber font-semibold mb-6">
+              DOCTORAL RESEARCHER // THEORETICAL &amp; COMPUTATIONAL CONDENSED MATTER
+            </div>
+
+            <div class="text-sm leading-relaxed space-y-4 text-paper-carbon dark:text-terminal-fg">
+              <p>
+                Doctoral researcher at <strong>Massey University</strong> (Auckland, New Zealand) within the <strong>Prof. Joachim Brand Research Group</strong>. Specializing in many-body quantum dynamics, non-equilibrium field theories, and stochastic quantum Monte Carlo propagators.
+              </p>
+              <p>
+                My computational focus centers on simulating non-linear solitonic dynamics in attractive Bose-Einstein condensates (BECs), real-time Full Configuration Interaction Quantum Monte Carlo (FCIQMC), and non-Hermitian extensions of the 1D Fermi-Hubbard lattice.
+              </p>
+              <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted pt-2 border-t border-paper-pencil dark:border-terminal-wire">
+                PEDIGREE: Inria Paris-Saclay (2025 Research Fellow) &bull; SVNIT Surat (MSc Physics) &bull; QSQT-2025 Organizer &bull; Open-Source Julia Core Contributor (Rimu.jl).
+              </p>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-2">
+              <a href="/research/" class="btn-brutalist">
+                [02/RESEARCH DOSSIER] ➔
+              </a>
+              <a href="/code/" class="btn-brutalist">
+                [03/JULIA MACHINERY] ➔
+              </a>
+              <a href="#terminal" class="btn-brutalist">
+                [TERMINAL CONSOLE] ↓
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: CORE COORDINATES LEDGER TABLE -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <div class="ledger-box p-6">
+            <div class="text-xs font-bold uppercase tracking-wider mb-4 border-b border-paper-pencil dark:border-terminal-wire pb-2 flex items-center justify-between">
+              <span>THEORETICAL DOMAINS</span>
+              <span class="stamp stamp-converged">[CONVERGED]</span>
+            </div>
+            <ul class="text-xs font-mono space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-paper-red dark:text-terminal-amber font-bold">01.</span>
+                <div>
+                  <div class="font-bold">Bose-Einstein Condensates (BEC)</div>
+                  <div class="text-paper-margin dark:text-terminal-muted">Bright solitons, phase shifts, and 1D collision dynamics.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-paper-red dark:text-terminal-amber font-bold">02.</span>
+                <div>
+                  <div class="font-bold">Real-Time FCIQMC Dynamics</div>
+                  <div class="text-paper-margin dark:text-terminal-muted">Stochastic master equations and LeapfrogComplex stabilization.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-paper-red dark:text-terminal-amber font-bold">03.</span>
+                <div>
+                  <div class="font-bold">1D Extended Fermi-Hubbard</div>
+                  <div class="text-paper-margin dark:text-terminal-muted">Non-Hermitian spectral topology &amp; Floquet engineering.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-paper-red dark:text-terminal-amber font-bold">04.</span>
+                <div>
+                  <div class="font-bold">Matrix Product States (MPS/DMRG)</div>
+                  <div class="text-paper-margin dark:text-terminal-muted">Low-entanglement variational optimization &amp; tensor networks.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="ledger-box p-6 bg-paper-subtle dark:bg-terminal-subtle">
+            <div class="text-xs font-bold uppercase tracking-wider mb-3 pb-2 border-b border-paper-pencil dark:border-terminal-wire flex items-center justify-between">
+              <span>PRIMARY STATION CONTACT</span>
+              <span class="stamp stamp-verified">[VERIFIED]</span>
+            </div>
+            <div class="text-xs font-mono space-y-2 text-paper-carbon dark:text-terminal-fg">
+              <div><span class="opacity-60">ACADEMIC EMAIL:</span> <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a></div>
+              <div><span class="opacity-60">ORCID ID:</span> <a href="https://orcid.org/0009-0005-4705-7798" target="_blank">0009-0005-4705-7798</a></div>
+              <div><span class="opacity-60">GITHUB REPOS:</span> <a href="https://github.com/jyotiraj-code" target="_blank">@jyotiraj-code</a></div>
+              <div class="pt-2 border-t border-paper-pencil dark:border-terminal-wire text-[10px] text-paper-margin dark:text-terminal-muted break-all">
+                PGP: 4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE LABORATORY TERMINAL CONSOLE -->
+      <div id="terminal" class="mb-12">
+        <div class="ledger-box-solid">
+          <div class="flex items-center justify-between px-4 py-2 bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg text-xs font-mono border-b border-paper-pencil dark:border-terminal-wire">
+            <div class="flex items-center gap-3">
+              <span class="inline-block w-2.5 h-2.5 bg-paper-red dark:bg-terminal-amber rounded-none"></span>
+              <span class="font-bold">PHYS-TERMINAL // AUCKLAND-CLUSTER-NODE-01</span>
+            </div>
+            <div class="flex items-center gap-3 opacity-75">
+              <span>SH: ZSH</span>
+              <span>TTY: /dev/pts/4</span>
+            </div>
+          </div>
+
+          <div id="termOutput" class="p-4 bg-paper-carbon dark:bg-terminal-bg text-paper-bg dark:text-terminal-fg font-mono text-xs max-h-72 overflow-y-auto space-y-2">
+            <div class="opacity-60">========================================================================</div>
+            <div class="text-paper-red dark:text-terminal-amber font-bold">MASSEY THEORETICAL PHYSICS LAB // INTERACTIVE EXPERIMENT LOG</div>
+            <div class="opacity-60">System initialised. Type 'help' to review available laboratory commands.</div>
+            <div class="opacity-60">========================================================================</div>
+          </div>
+
+          <form id="termForm" class="terminal-input-row flex items-center bg-paper-carbon dark:bg-terminal-bg border-t border-paper-pencil dark:border-terminal-wire px-4 py-3">
+            <span class="text-paper-red dark:text-terminal-amber font-mono text-xs font-bold mr-2">jnath@massey:~$</span>
+            <input
+              type="text"
+              id="termInput"
+              class="flex-grow bg-transparent text-paper-bg dark:text-terminal-fg font-mono text-xs outline-none border-none placeholder-opacity-40"
+              placeholder="help / bio / research / code / slurm / pubs / contact / theme"
+              autocomplete="off"
+            />
+            <span class="cursor-blink font-mono text-paper-red dark:text-terminal-amber ml-1">_</span>
+          </form>
+        </div>
+      </div>
+
+      <!-- HIGHLIGHT DISPATCHES & PUBLICATIONS PREVIEW -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="ledger-box p-6">
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+            <h2 class="text-sm font-bold tracking-wider">RECENT RESEARCH DISPATCHES</h2>
+            <a href="/research/" class="text-xs font-mono text-paper-red dark:text-terminal-amber">[VIEW ALL]</a>
+          </div>
+          <div class="space-y-4 text-xs font-mono">
+            <div class="border-l-2 border-paper-red dark:border-terminal-amber pl-3">
+              <div class="font-bold text-paper-carbon dark:text-terminal-fg">Real-Time Dynamics in FCIQMC: Stabilizing Stochastic Propagators</div>
+              <div class="text-paper-margin dark:text-terminal-muted mt-1">With Joachim Brand, Matija Čufar, C. J. Bradly. Formulating InternalCoherence for LeapfrogComplex.</div>
+              <div class="mt-1 flex gap-2">
+                <span class="stamp stamp-converged">[PREPRINT 2026]</span>
+                <span class="stamp stamp-archived">arXiv:2602.XXXX</span>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-paper-pencil dark:border-terminal-wire pl-3">
+              <div class="font-bold text-paper-carbon dark:text-terminal-fg">Bright Solitons &amp; Collisional Phase Shifts in Attractive BECs</div>
+              <div class="text-paper-margin dark:text-terminal-muted mt-1">With Ray Yang, Elke Pahl, Joachim Brand. Non-polynomial Gross-Pitaevskii solver with quantum corrections.</div>
+              <div class="mt-1 flex gap-2">
+                <span class="stamp stamp-review">[IN REVIEW]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-box p-6">
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+            <h2 class="text-sm font-bold tracking-wider">OPEN-SOURCE JULIA ENGINES</h2>
+            <a href="/code/" class="text-xs font-mono text-paper-red dark:text-terminal-amber">[VIEW ALL]</a>
+          </div>
+          <div class="space-y-4 text-xs font-mono">
+            <div class="border-l-2 border-paper-blue dark:border-terminal-cyan pl-3">
+              <div class="font-bold text-paper-carbon dark:text-terminal-fg">Rimu.jl &amp; RimuRealTime.jl</div>
+              <div class="text-paper-margin dark:text-terminal-muted mt-1">Real-time FCIQMC dynamics, LeapfrogComplex time evolver, InternalCoherence post-step strategy, and SignCorrelator observable.</div>
+              <div class="mt-1 flex gap-2">
+                <span class="stamp stamp-verified">[PR #19 MERGED]</span>
+                <span class="stamp stamp-archived">JULIA 1.10+</span>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-paper-pencil dark:border-terminal-wire pl-3">
+              <div class="font-bold text-paper-carbon dark:text-terminal-fg">FermiHubbard1D.jl</div>
+              <div class="text-paper-margin dark:text-terminal-muted mt-1">Exact diagonalization and Arnoldi iteration engine for 1D extended correlated lattices.</div>
+              <div class="mt-1 flex gap-2">
+                <span class="stamp stamp-converged">[CONVERGED]</span>
+              </div>
+            </div>
+      <!-- CULTURAL & ACOUSTIC ANALOG GRAPHIC: ASSAMESE JAAPI & TALA MANDALA -->
+      <div class="ledger-box p-6 my-8 text-center font-mono">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 text-xs">
+          <div class="font-bold flex items-center gap-2">
+            <span class="text-paper-red dark:text-terminal-amber">ARCHIVAL PLATE 01-A</span>
+            <span class="opacity-50">//</span>
+            <span>জাপি আৰু তাল চক্ৰ (ASSAMESE JAAPI &amp; TALA ACOUSTIC MANDALA)</span>
+          </div>
+          <span class="stamp stamp-verified">GENERATIVE CODE</span>
+        </div>
+
+        <div class="flex justify-center my-4 overflow-x-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" width="440" height="440" class="max-w-full h-auto">
+            <circle cx="260" cy="260" r="250" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="260" cy="260" r="242" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3" />
+            <circle cx="260" cy="260" r="215" fill="none" stroke="currentColor" stroke-width="1" />
+            <circle cx="260" cy="260" r="160" fill="none" stroke="currentColor" stroke-width="0.75" />
+            <circle cx="260" cy="260" r="110" fill="none" stroke="currentColor" stroke-width="1" />
+            <circle cx="260" cy="260" r="60" fill="none" stroke="#942A27" stroke-width="1.5" />
+
+            <g stroke="currentColor" stroke-width="0.75" opacity="0.6">
+              <line x1="260" y1="45" x2="260" y2="475" />
+              <line x1="45" y1="260" x2="475" y2="260" />
+              <line x1="108" y1="108" x2="412" y2="412" />
+              <line x1="108" y1="412" x2="412" y2="108" />
+              <line x1="178" y1="62" x2="342" y2="458" />
+              <line x1="342" y1="62" x2="178" y2="458" />
+              <line x1="62" y1="178" x2="458" y2="342" />
+              <line x1="62" y1="342" x2="458" y2="178" />
+            </g>
+
+            <g stroke="#942A27" fill="none" stroke-width="1.2">
+              <polygon points="260,165 272,187 260,210 248,187" />
+              <polygon points="260,355 272,333 260,310 248,333" />
+              <polygon points="165,260 187,272 210,260 187,248" />
+              <polygon points="355,260 333,272 310,260 333,248" />
+              <polygon points="193,193 210,200 200,217 183,210" />
+              <polygon points="327,327 310,320 320,303 337,310" />
+              <polygon points="327,193 310,200 320,217 337,210" />
+              <polygon points="193,327 210,320 200,303 183,310" />
+            </g>
+
+            <text x="260" y="32" font-family="monospace" font-size="11" font-weight="bold" fill="#942A27" text-anchor="middle">SAM [X] // DHA (1)</text>
+            <text x="495" y="264" font-family="monospace" font-size="10" font-weight="bold" fill="currentColor" text-anchor="start">TALI 2 // DHA (5)</text>
+            <text x="260" y="495" font-family="monospace" font-size="10" font-weight="bold" fill="#1D4ED8" text-anchor="middle">KHALI [0] // DHA (9)</text>
+            <text x="25" y="264" font-family="monospace" font-size="10" font-weight="bold" fill="currentColor" text-anchor="end">TALI 3 // TA (13)</text>
+
+            <text x="365" y="145" font-family="monospace" font-size="8" fill="currentColor" opacity="0.7">r₁: 16/15 (Komal Re)</text>
+            <text x="365" y="380" font-family="monospace" font-size="8" fill="currentColor" opacity="0.7">g₂: 6/5 (Komal Ga)</text>
+            <text x="155" y="380" font-family="monospace" font-size="8" fill="currentColor" opacity="0.7">d₁: 8/5 (Komal Dha)</text>
+            <text x="155" y="145" font-family="monospace" font-size="8" fill="currentColor" opacity="0.7">m₂: 45/32 (Teevra Ma)</text>
+
+            <circle cx="260" cy="260" r="48" fill="#942A27" opacity="0.1" />
+            <circle cx="260" cy="260" r="28" fill="#942A27" opacity="0.2" />
+            
+            <text x="260" y="246" font-family="'Newsreader', serif" font-size="15" font-weight="bold" fill="#942A27" text-anchor="middle">দাপোন</text>
+            <text x="260" y="264" font-family="'Newsreader', serif" font-size="10" fill="currentColor" text-anchor="middle">লুইতৰ পৰা ৱাকাতিলৈ</text>
+            <text x="260" y="280" font-family="monospace" font-size="7.5" fill="currentColor" opacity="0.7" text-anchor="middle">AUCKLAND &bull; 45° S &bull; NZST</text>
+
+            <path d="M 15 35 L 15 15 L 35 15" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M 505 35 L 505 15 L 485 15" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M 15 485 L 15 505 L 35 505" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M 505 485 L 505 505 L 485 505" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+        </div>
+
+        <div class="text-xs text-paper-margin dark:text-terminal-muted max-w-xl mx-auto leading-relaxed border-t border-paper-pencil dark:border-terminal-wire pt-3">
+          <strong>Cultural &amp; Geometric Synthesis:</strong> 16-rib bamboo framework of the Assamese <em>Jaapi</em> (জাপি) mapped onto the 16-matra metric cycle of North Indian <em>Teental</em> (4+4+4+4). The geometric Gamusa diamonds trace the 22 microtonal shrutis, linking the heritage of the Brahmaputra (লুইত) with Southern Hemisphere quantum research.
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle py-8 text-xs font-mono">
+      <div class="site-container flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        <div>
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg tracking-typewriter mb-1">
+            MASSEY UNIVERSITY THEORETICAL &amp; COMPUTATIONAL PHYSICS LAB
+          </div>
+          <div class="text-paper-margin dark:text-terminal-muted leading-relaxed">
+            School of Natural Sciences &bull; Prof. Joachim Brand Research Group<br />
+            Massey University Albany Campus, Private Bag 102 904, Auckland 0745, New Zealand.<br />
+            Primary: <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a> &bull; PGP: <span class="text-paper-red dark:text-terminal-amber">4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5 md:text-right">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">INDEX NETWORK</div>
+          <div class="flex flex-wrap md:justify-end gap-3">
+            <a href="https://github.com/jyotiraj-code" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://orcid.org/0009-0005-4705-7798" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-2">
+            STATION ARCHIVE &bull; NO TELEMETRY &bull; REVISION FFE919F
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- COMMAND PALETTE MODAL -->
+    <div id="cmdPaletteBackdrop" class="cmd-backdrop hidden no-print" aria-modal="true" role="dialog">
+      <div class="cmd-modal">
+        <div class="flex items-center justify-between px-4 py-2 bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire text-xs font-mono">
+          <div class="font-bold flex items-center gap-2">
+            <span class="text-paper-red dark:text-terminal-amber">CATALOG DISPATCH</span>
+            <span class="opacity-50">//</span>
+            <span>INDEX SEARCH</span>
+          </div>
+          <div class="opacity-60">[ESC TO EXIT]</div>
+        </div>
+        
+        <input
+          type="text"
+          id="cmdPaletteInput"
+          class="cmd-input font-mono"
+          placeholder="Type a domain, paper title, Julia module, or essay topic..."
+          autocomplete="off"
+        />
+
+        <div id="cmdPaletteResults" class="cmd-results font-mono"></div>
+
+        <div class="px-4 py-2 border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle flex items-center justify-between text-[11px] font-mono text-paper-margin dark:text-terminal-muted">
+          <div>↑↓ TO NAVIGATE &bull; ENTER TO RETRIEVE</div>
+          <div>SEARCHING 18+ ARCHIVAL ENTRIES</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="/js/app.js" defer></script>
+    <script src="/js/terminal.js" defer></script>
+    <script src="/js/sitemap-graph.js" defer></script>
+  </body>
+</html>
+

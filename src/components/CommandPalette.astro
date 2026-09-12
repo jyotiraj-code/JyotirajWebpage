@@ -1,0 +1,34 @@
+---
+// Command palette modal overlay
+---
+
+<div id="cmdPaletteBackdrop" class="cmd-backdrop hidden no-print" aria-modal="true" role="dialog">
+  <div class="cmd-modal">
+    <div class="flex items-center justify-between px-4 py-2 bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire text-xs font-mono">
+      <div class="font-bold flex items-center gap-2">
+        <span class="text-paper-red dark:text-terminal-amber">CATALOG DISPATCH</span>
+        <span class="opacity-50">//</span>
+        <span>INDEX SEARCH</span>
+      </div>
+      <div class="opacity-60">[ESC TO EXIT]</div>
+    </div>
+    
+    <input
+      type="text"
+      id="cmdPaletteInput"
+      class="cmd-input font-mono"
+      placeholder="Type a domain, paper title, Julia module, or essay topic..."
+      autocomplete="off"
+    />
+
+    <div id="cmdPaletteResults" class="cmd-results font-mono">
+      <!-- Dynamically filled by app.js -->
+    </div>
+
+    <div class="px-4 py-2 border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle flex items-center justify-between text-[11px] font-mono text-paper-margin dark:text-terminal-muted">
+      <div>↑↓ TO NAVIGATE &bull; ENTER TO RETRIEVE</div>
+      <div>SEARCHING 18+ ARCHIVAL ENTRIES</div>
+    </div>
+  </div>
+</div>
+

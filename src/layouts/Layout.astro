@@ -1,0 +1,128 @@
+---
+import HeaderDocket from '../components/HeaderDocket.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const {
+  title,
+  description = "Archival documentation system & portfolio for Jyotiraj (Raj) Nath, Computational Quantum Physicist and Open-Source Julia Developer.",
+  currentPath = '/'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} // JYOTIRAJ NATH ARCHIVE</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Jyotiraj (Raj) Nath" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script is:inline>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="phosphor"]'],
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                bg: '#F5F2EB',
+                subtle: '#EDE8DE',
+                card: '#FAF8F5',
+                carbon: '#1A1A1C',
+                pencil: '#D1CBBF',
+                margin: '#8C857B',
+                red: '#942A27',
+                blue: '#1D4ED8',
+                green: '#2D5A27',
+              },
+              terminal: {
+                bg: '#0F0F10',
+                subtle: '#18181A',
+                fg: '#E2E0D8',
+                muted: '#6B7280',
+                wire: '#28282C',
+                amber: '#D97706',
+                phosphor: '#059669',
+                crimson: '#DC2626',
+                cyan: '#0284C7',
+              }
+            },
+            fontFamily: {
+              mono: ['"Courier Prime"', '"IBM Plex Mono"', '"Space Mono"', 'monospace'],
+              serif: ['Newsreader', '"EB Garamond"', 'serif'],
+            },
+            letterSpacing: {
+              typewriter: '0.08em',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <!-- Pre-load theme script to prevent flash -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('jyotiraj_archival_theme');
+      if (savedTheme === 'phosphor') {
+        document.documentElement.setAttribute('data-theme', 'phosphor');
+      }
+    </script>
+  </head>
+  <body>
+    <HeaderDocket currentPath={currentPath} />
+
+    <main class="site-container flex-grow pb-16">
+      <slot />
+    </main>
+
+    <!-- FOOTER ARCHIVAL DOSSIER -->
+    <footer class="w-full border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle py-8 text-xs font-mono">
+      <div class="site-container flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        <div>
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg tracking-typewriter mb-1">
+            MASSEY UNIVERSITY THEORETICAL &amp; COMPUTATIONAL PHYSICS LAB
+          </div>
+          <div class="text-paper-margin dark:text-terminal-muted leading-relaxed">
+            School of Natural Sciences &bull; Prof. Joachim Brand Research Group<br />
+            Massey University Albany Campus, Private Bag 102 904, Auckland 0745, New Zealand.<br />
+            Primary: <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a> &bull; PGP: <span class="text-paper-red dark:text-terminal-amber">4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5 md:text-right">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">INDEX NETWORK</div>
+          <div class="flex flex-wrap md:justify-end gap-3">
+            <a href="https://github.com/jyotiraj-code" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://orcid.org/0009-0005-4705-7798" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-2">
+            STATION ARCHIVE &bull; NO TELEMETRY &bull; REVISION FFE919F
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <CommandPalette />
+
+    <!-- Application Script & Lively Connected Graph Sitemap HUD -->
+    <script src="/js/app.js" defer></script>
+    <script src="/js/sitemap-graph.js" defer></script>
+  </body>
+</html>

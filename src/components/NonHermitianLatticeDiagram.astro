@@ -1,0 +1,124 @@
+---
+// Non-Hermitian Lattice Skin Mode & Floquet Coupling Diagram
+// Code-generated SVG plotting asymmetric hopping amplitudes and boundary accumulation
+---
+
+<div class="ledger-box p-6 my-8 text-center font-mono">
+  <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 text-xs">
+    <div class="font-bold flex items-center gap-2">
+      <span class="text-paper-red dark:text-terminal-amber">ARCHIVAL PLATE 03-C</span>
+      <span class="opacity-50">//</span>
+      <span>1D NON-HERMITIAN FERMI-HUBBARD SKIN EFFECT &amp; BOUNDARY ACCUMULATION</span>
+    </div>
+    <span class="stamp stamp-converged">LATTICE SPECTRUM</span>
+  </div>
+
+  <div class="flex justify-center my-4 overflow-x-auto">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="560" height="224" class="max-w-full h-auto">
+      <!-- Lattice baseline wire -->
+      <line x1="50" y1="130" x2="550" y2="130" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.4" />
+
+      <!-- Lattice sites (6 sites labeled 1 to 6) -->
+      <!-- Site 1 -->
+      <g transform="translate(80, 130)">
+        <circle cx="0" cy="0" r="10" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+        <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">1</text>
+      </g>
+      <!-- Site 2 -->
+      <g transform="translate(170, 130)">
+        <circle cx="0" cy="0" r="11" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+        <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">2</text>
+      </g>
+      <!-- Site 3 -->
+      <g transform="translate(260, 130)">
+        <circle cx="0" cy="0" r="13" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+        <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">3</text>
+      </g>
+      <!-- Site 4 -->
+      <g transform="translate(350, 130)">
+        <circle cx="0" cy="0" r="16" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+        <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">4</text>
+      </g>
+      <!-- Site 5 -->
+      <g transform="translate(440, 130)">
+        <circle cx="0" cy="0" r="20" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+        <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">5</text>
+      </g>
+      <!-- Site 6 (Right boundary, dominant localization) -->
+      <g transform="translate(530, 130)">
+        <circle cx="0" cy="0" r="25" fill="#942A27" opacity="0.15" />
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#942A27" stroke-width="2" />
+        <text x="0" y="5" font-family="monospace" font-size="11" font-weight="bold" fill="#942A27" text-anchor="middle">L=6</text>
+      </g>
+
+      <!-- Asymmetric Hopping Arrows (tR > tL) -->
+      <!-- Forward Hopping (Right, strong) -->
+      <g stroke="#942A27" fill="#942A27" stroke-width="1.8">
+        <path d="M 98,118 Q 125,98 152,118" fill="none" />
+        <polygon points="152,118 142,114 146,122" />
+
+        <path d="M 188,118 Q 215,98 242,118" fill="none" />
+        <polygon points="242,118 232,114 236,122" />
+
+        <path d="M 278,118 Q 305,98 332,118" fill="none" />
+        <polygon points="332,118 322,114 326,122" />
+
+        <path d="M 368,118 Q 395,98 422,118" fill="none" />
+        <polygon points="422,118 412,114 416,122" />
+
+        <path d="M 458,118 Q 485,98 512,118" fill="none" />
+        <polygon points="512,118 502,114 506,122" />
+      </g>
+      <text x="305" y="86" font-family="monospace" font-size="9" font-weight="bold" fill="#942A27" text-anchor="middle">
+        FORING HOPPING: t_R = t &bull; e^{+γ} (AMPLIFIED)
+      </text>
+
+      <!-- Backward Hopping (Left, damped) -->
+      <g stroke="#1D4ED8" fill="#1D4ED8" stroke-width="1" opacity="0.6">
+        <path d="M 152,142 Q 125,158 98,142" fill="none" />
+        <polygon points="98,142 108,146 104,138" />
+
+        <path d="M 242,142 Q 215,158 188,142" fill="none" />
+        <polygon points="188,142 198,146 194,138" />
+
+        <path d="M 332,142 Q 305,158 278,142" fill="none" />
+        <polygon points="278,142 288,146 284,138" />
+
+        <path d="M 422,142 Q 395,158 368,142" fill="none" />
+        <polygon points="368,142 378,146 374,138" />
+
+        <path d="M 512,142 Q 485,158 458,142" fill="none" />
+        <polygon points="458,142 468,146 464,138" />
+      </g>
+      <text x="305" y="180" font-family="monospace" font-size="9" fill="#1D4ED8" text-anchor="middle">
+        BACKWARD HOPPING: t_L = t &bull; e^{-γ} (SUPPRESSED)
+      </text>
+
+      <!-- Wavefunction Envelope Curve (Skin Effect: |ψ(x)|² ~ e^{2γx}) -->
+      <path d="M 80,45 Q 260,42 440,28 T 530,5" fill="none" stroke="#942A27" stroke-width="1.8" stroke-dasharray="3 2" />
+      <text x="530" y="22" font-family="monospace" font-size="8.5" font-weight="bold" fill="#942A27" text-anchor="end">
+        |ψ_R(x)|² ∝ exp(2γx)
+      </text>
+
+      <!-- Boundary Wall indicator -->
+      <line x1="560" y1="60" x2="560" y2="200" stroke="currentColor" stroke-width="2" />
+      <line x1="560" y1="70" x2="570" y2="60" stroke="currentColor" stroke-width="1" />
+      <line x1="560" y1="100" x2="570" y2="90" stroke="currentColor" stroke-width="1" />
+      <line x1="560" y1="130" x2="570" y2="120" stroke="currentColor" stroke-width="1" />
+      <line x1="560" y1="160" x2="570" y2="150" stroke="currentColor" stroke-width="1" />
+      <line x1="560" y1="190" x2="570" y2="180" stroke="currentColor" stroke-width="1" />
+      <text x="568" y="212" font-family="monospace" font-size="8" fill="currentColor">HARD WALL</text>
+
+      <!-- Outer Brackets -->
+      <path d="M 15 25 L 15 15 L 25 15" fill="none" stroke="currentColor" stroke-width="1" />
+      <path d="M 585 25 L 585 15 L 575 15" fill="none" stroke="currentColor" stroke-width="1" />
+      <path d="M 15 215 L 15 225 L 25 225" fill="none" stroke="currentColor" stroke-width="1" />
+      <path d="M 585 215 L 585 225 L 575 225" fill="none" stroke="currentColor" stroke-width="1" />
+    </svg>
+  </div>
+
+  <div class="text-xs text-paper-margin dark:text-terminal-muted max-w-xl mx-auto leading-relaxed border-t border-paper-pencil dark:border-terminal-wire pt-3">
+    <strong>Non-Hermitian Skin Effect:</strong> Under open boundary conditions, non-reciprocal hoppings ($\gamma > 0$) force an extensive number of bulk eigenstates to collapse exponentially onto the boundary manifold, fundamentally altering the bulk-boundary correspondence.
+  </div>
+</div>
+

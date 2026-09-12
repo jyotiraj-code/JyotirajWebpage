@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AssameseJaapiMandala from '../components/AssameseJaapiMandala.astro';
+---
+
+<Layout title="Dossier & Executive Ledger" currentPath="/">
+  <!-- DOSSIER HERO GRID -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+    <!-- LEFT: EXECUTIVE LEDGER SUMMARY -->
+    <div class="lg:col-span-7 flex flex-col justify-between">
+      <div class="ledger-box p-6 md:p-8">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-6">
+          <span class="stamp stamp-verified">[INDEX ENTRY: JN-01]</span>
+          <span class="text-xs font-mono text-paper-margin dark:text-terminal-muted">LOC: AUCKLAND, NZ (UTC+12)</span>
+        </div>
+
+        <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter mb-3 text-paper-carbon dark:text-terminal-fg">
+          JYOTIRAJ (RAJ) NATH
+        </h1>
+        <div class="text-sm font-mono text-paper-red dark:text-terminal-amber font-semibold mb-6">
+          DOCTORAL RESEARCHER // THEORETICAL &amp; COMPUTATIONAL CONDENSED MATTER
+        </div>
+
+        <div class="text-sm leading-relaxed space-y-4 text-paper-carbon dark:text-terminal-fg">
+          <p>
+            Doctoral researcher at <strong>Massey University</strong> (Auckland, New Zealand) within the <strong>Prof. Joachim Brand Research Group</strong>. Specializing in many-body quantum dynamics, non-equilibrium field theories, and stochastic quantum Monte Carlo propagators.
+          </p>
+          <p>
+            My computational focus centers on simulating non-linear solitonic dynamics in attractive Bose-Einstein condensates (BECs), real-time Full Configuration Interaction Quantum Monte Carlo (FCIQMC), and non-Hermitian extensions of the 1D Fermi-Hubbard lattice.
+          </p>
+          <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted pt-2 border-t border-paper-pencil dark:border-terminal-wire">
+            PEDIGREE: Inria Paris-Saclay (2025 Research Fellow) &bull; SVNIT Surat (MSc Physics) &bull; QSQT-2025 Organizer &bull; Open-Source Julia Core Contributor (Rimu.jl).
+          </p>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <a href="/research/" class="btn-brutalist">
+            [02/RESEARCH DOSSIER] ➔
+          </a>
+          <a href="/code/" class="btn-brutalist">
+            [03/JULIA MACHINERY] ➔
+          </a>
+          <a href="#terminal" class="btn-brutalist">
+            [TERMINAL CONSOLE] ↓
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: CORE COORDINATES LEDGER TABLE -->
+    <div class="lg:col-span-5 flex flex-col gap-6">
+      <div class="ledger-box p-6">
+        <div class="text-xs font-bold uppercase tracking-wider mb-4 border-b border-paper-pencil dark:border-terminal-wire pb-2 flex items-center justify-between">
+          <span>THEORETICAL DOMAINS</span>
+          <span class="stamp stamp-converged">[CONVERGED]</span>
+        </div>
+        <ul class="text-xs font-mono space-y-3">
+          <li class="flex items-start gap-2">
+            <span class="text-paper-red dark:text-terminal-amber font-bold">01.</span>
+            <div>
+              <div class="font-bold">Bose-Einstein Condensates (BEC)</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Bright solitons, phase shifts, and 1D collision dynamics.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-paper-red dark:text-terminal-amber font-bold">02.</span>
+            <div>
+              <div class="font-bold">Real-Time FCIQMC Dynamics</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Stochastic master equations and LeapfrogComplex stabilization.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-paper-red dark:text-terminal-amber font-bold">03.</span>
+            <div>
+              <div class="font-bold">1D Extended Fermi-Hubbard</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Non-Hermitian spectral topology &amp; Floquet engineering.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-paper-red dark:text-terminal-amber font-bold">04.</span>
+            <div>
+              <div class="font-bold">Matrix Product States (MPS/DMRG)</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Low-entanglement variational optimization &amp; tensor networks.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ledger-box p-6 bg-paper-subtle dark:bg-terminal-subtle">
+        <div class="text-xs font-bold uppercase tracking-wider mb-3 pb-2 border-b border-paper-pencil dark:border-terminal-wire flex items-center justify-between">
+          <span>PRIMARY STATION CONTACT</span>
+          <span class="stamp stamp-verified">[VERIFIED]</span>
+        </div>
+        <div class="text-xs font-mono space-y-2 text-paper-carbon dark:text-terminal-fg">
+          <div><span class="opacity-60">ACADEMIC EMAIL:</span> <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a></div>
+          <div><span class="opacity-60">ORCID ID:</span> <a href="https://orcid.org/0009-0005-4705-7798" target="_blank">0009-0005-4705-7798</a></div>
+          <div><span class="opacity-60">GITHUB REPOS:</span> <a href="https://github.com/jyotiraj-code" target="_blank">@jyotiraj-code</a></div>
+          <div class="pt-2 border-t border-paper-pencil dark:border-terminal-wire text-[10px] text-paper-margin dark:text-terminal-muted break-all">
+            PGP: 4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE LABORATORY TERMINAL CONSOLE -->
+  <div id="terminal" class="mb-12">
+    <div class="ledger-box-solid">
+      <!-- TERMINAL TOP BAR -->
+      <div class="flex items-center justify-between px-4 py-2 bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg text-xs font-mono border-b border-paper-pencil dark:border-terminal-wire">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2.5 h-2.5 bg-paper-red dark:bg-terminal-amber rounded-none"></span>
+          <span class="font-bold">PHYS-TERMINAL // AUCKLAND-CLUSTER-NODE-01</span>
+        </div>
+        <div class="flex items-center gap-3 opacity-75">
+          <span>SH: ZSH</span>
+          <span>TTY: /dev/pts/4</span>
+        </div>
+      </div>
+
+      <!-- TERMINAL OUTPUT BUFFER -->
+      <div id="termOutput" class="p-4 bg-paper-carbon dark:bg-terminal-bg text-paper-bg dark:text-terminal-fg font-mono text-xs max-h-72 overflow-y-auto space-y-2">
+        <div class="opacity-60">========================================================================</div>
+        <div class="text-paper-red dark:text-terminal-amber font-bold">MASSEY THEORETICAL PHYSICS LAB // INTERACTIVE EXPERIMENT LOG</div>
+        <div class="opacity-60">System initialised. Type 'help' to review available laboratory commands.</div>
+        <div class="opacity-60">========================================================================</div>
+      </div>
+
+      <!-- TERMINAL INPUT FORM -->
+      <form id="termForm" class="terminal-input-row flex items-center bg-paper-carbon dark:bg-terminal-bg border-t border-paper-pencil dark:border-terminal-wire px-4 py-3">
+        <span class="text-paper-red dark:text-terminal-amber font-mono text-xs font-bold mr-2">jnath@massey:~$</span>
+        <input
+          type="text"
+          id="termInput"
+          class="flex-grow bg-transparent text-paper-bg dark:text-terminal-fg font-mono text-xs outline-none border-none placeholder-opacity-40"
+          placeholder="help / bio / research / code / slurm / pubs / contact / theme"
+          autocomplete="off"
+        />
+        <span class="cursor-blink font-mono text-paper-red dark:text-terminal-amber ml-1">_</span>
+      </form>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHT DISPATCHES & PUBLICATIONS PREVIEW -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <!-- RECENT DISPATCHES -->
+    <div class="ledger-box p-6">
+      <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+        <h2 class="text-sm font-bold tracking-wider">RECENT RESEARCH DISPATCHES</h2>
+        <a href="/research/" class="text-xs font-mono text-paper-red dark:text-terminal-amber">[VIEW ALL]</a>
+      </div>
+      <div class="space-y-4 text-xs font-mono">
+        <div class="border-l-2 border-paper-red dark:border-terminal-amber pl-3">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">Real-Time Dynamics in FCIQMC: Stabilizing Stochastic Propagators</div>
+          <div class="text-paper-margin dark:text-terminal-muted mt-1">With Joachim Brand, Matija Čufar, C. J. Bradly. Formulating InternalCoherence for LeapfrogComplex.</div>
+          <div class="mt-1 flex gap-2">
+            <span class="stamp stamp-converged">[PREPRINT 2026]</span>
+            <span class="stamp stamp-archived">arXiv:2602.XXXX</span>
+          </div>
+        </div>
+
+        <div class="border-l-2 border-paper-pencil dark:border-terminal-wire pl-3">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">Bright Solitons &amp; Collisional Phase Shifts in Attractive BECs</div>
+          <div class="text-paper-margin dark:text-terminal-muted mt-1">With Ray Yang, Elke Pahl, Joachim Brand. Non-polynomial Gross-Pitaevskii solver with quantum corrections.</div>
+          <div class="mt-1 flex gap-2">
+            <span class="stamp stamp-review">[IN REVIEW]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT OPEN SOURCE MACHINERY -->
+    <div class="ledger-box p-6">
+      <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+        <h2 class="text-sm font-bold tracking-wider">OPEN-SOURCE JULIA ENGINES</h2>
+        <a href="/code/" class="text-xs font-mono text-paper-red dark:text-terminal-amber">[VIEW ALL]</a>
+      </div>
+      <div class="space-y-4 text-xs font-mono">
+        <div class="border-l-2 border-paper-blue dark:border-terminal-cyan pl-3">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">Rimu.jl &amp; RimuRealTime.jl</div>
+          <div class="text-paper-margin dark:text-terminal-muted mt-1">Real-time FCIQMC dynamics, LeapfrogComplex time evolver, InternalCoherence post-step strategy, and SignCorrelator observable.</div>
+          <div class="mt-1 flex gap-2">
+            <span class="stamp stamp-verified">[PR #19 MERGED]</span>
+            <span class="stamp stamp-archived">JULIA 1.10+</span>
+          </div>
+        </div>
+
+        <div class="border-l-2 border-paper-pencil dark:border-terminal-wire pl-3">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">FermiHubbard1D.jl</div>
+          <div class="text-paper-margin dark:text-terminal-muted mt-1">Exact diagonalization and Arnoldi iteration engine for 1D extended correlated lattices.</div>
+          <div class="mt-1 flex gap-2">
+            <span class="stamp stamp-converged">[CONVERGED]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CULTURAL & ACOUSTIC ANALOG MANDALA -->
+  <AssameseJaapiMandala />
+
+  <script src="/js/terminal.js" defer></script>
+</Layout>
+

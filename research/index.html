@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Index &amp; Scientific Dossier // JYOTIRAJ NATH ARCHIVE</title>
+    <meta name="description" content="Research index, theoretical frameworks (BECs, solitons, GPE, FCIQMC, Fermi-Hubbard), publications with BibTeX drawers, and academic pedigree." />
+    <meta name="author" content="Jyotiraj (Raj) Nath" />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="phosphor"]'],
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                bg: '#F5F2EB',
+                subtle: '#EDE8DE',
+                card: '#FAF8F5',
+                carbon: '#1A1A1C',
+                pencil: '#D1CBBF',
+                margin: '#8C857B',
+                red: '#942A27',
+                blue: '#1D4ED8',
+                green: '#2D5A27',
+              },
+              terminal: {
+                bg: '#0F0F10',
+                subtle: '#18181A',
+                fg: '#E2E0D8',
+                muted: '#6B7280',
+                wire: '#28282C',
+                amber: '#D97706',
+                phosphor: '#059669',
+                crimson: '#DC2626',
+                cyan: '#0284C7',
+              }
+            },
+            fontFamily: {
+              mono: ['"Courier Prime"', '"IBM Plex Mono"', '"Space Mono"', 'monospace'],
+              serif: ['Newsreader', '"EB Garamond"', 'serif'],
+            },
+            letterSpacing: {
+              typewriter: '0.08em',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <script>
+      const savedTheme = localStorage.getItem('jyotiraj_archival_theme');
+      if (savedTheme === 'phosphor') {
+        document.documentElement.setAttribute('data-theme', 'phosphor');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="w-full border-b border-paper-pencil dark:border-terminal-wire bg-paper-bg dark:bg-terminal-bg relative z-20 mb-8">
+      <div class="site-container py-3 border-b border-paper-pencil dark:border-terminal-wire">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs font-mono">
+          <div>
+            <div class="font-bold text-sm tracking-typewriter text-paper-carbon dark:text-terminal-fg flex items-center gap-2">
+              <span>JYOTIRAJ (RAJ) NATH</span>
+              <span class="opacity-40">//</span>
+              <span class="text-paper-red dark:text-terminal-amber">DOC-ID: JN-MASSEY-PHYS</span>
+              <span class="hidden sm:inline-block stamp stamp-verified text-[10px] py-0 px-1.5">[CONVERGED]</span>
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-0.5">
+              Doctoral Researcher, Theoretical &amp; Computational Physics &bull; Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Research Group
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 text-[11px]">
+            <div class="stamp stamp-archived" id="nzstClock">
+              2026-09-12 23:15:00 NZST
+            </div>
+            <div class="stamp stamp-archived hidden sm:inline-flex">
+              rev: <span class="text-paper-red dark:text-terminal-amber">ffe919f</span>
+            </div>
+            <div class="stamp stamp-archived" id="sessionUptime">
+              UPTIME: 00:00:00
+            </div>
+            <button id="cmdSearchTrigger" class="btn-brutalist text-[10px] py-1 px-2" title="Shortcut: Cmd+K">
+              [⌘K INDEX]
+            </button>
+            <button id="themeToggleBtn" class="btn-brutalist text-[10px] py-1 px-2">
+              MODE: [ARCHIVAL PAPER]
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOG NAVIGATION TABS -->
+      <nav class="site-container overflow-x-auto">
+        <div class="flex border-l border-paper-pencil dark:border-terminal-wire">
+          <a href="/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[01/</span><span>DOSSIER]</span></a>
+          <a href="/research/" class="nav-tab active"><span class="opacity-50 text-[10px] mr-1.5">[02/</span><span>RESEARCH]</span></a>
+          <a href="/code/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[03/</span><span>COMPUTATION]</span></a>
+          <a href="/learnings/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[04/</span><span>LEDGER]</span></a>
+          <a href="/essays/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[05/</span><span>ESSAYS]</span></a>
+          <a href="/archive/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[06/</span><span>ARCHIVE]</span></a>
+          <a href="/colophon/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[07/</span><span>COLOPHON]</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-container flex-grow pb-16">
+      <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+        <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+          <span>SECTION 02</span>
+          <span>//</span>
+          <span>THEORETICAL &amp; COMPUTATIONAL CONDENSED MATTER</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">RESEARCH INDEX &amp; SCIENTIFIC DOSSIER</h1>
+        <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+          Curated ledger of theoretical formulations, active investigations, peer-reviewed articles, and collaborative pedigree.
+        </p>
+      </div>
+
+      <!-- SECTION 1: THEORETICAL FOUNDATIONS & EQUATIONS -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">01 // THEORETICAL FRAMEWORKS &amp; FORMULATIONS</h2>
+          <span class="stamp stamp-converged">[CONVERGED EQUATIONS]</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="ledger-box p-5">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+              <span class="font-bold text-xs uppercase">Bose-Einstein Condensates &amp; Soliton Collisions</span>
+              <span class="stamp stamp-verified">1D GPE</span>
+            </div>
+            <p class="text-xs leading-relaxed text-paper-carbon dark:text-terminal-fg mb-3">
+              In quasi-one-dimensional atomic waveguides, attractive contact interactions ($g_{1D} < 0$) counteract kinetic dispersion, enabling the formation of non-dispersive bright matter-wave solitons. We study phase shifts and quantum corrections beyond mean-field theory:
+            </p>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-center font-mono text-xs overflow-x-auto my-3">
+              $$i\hbar \frac{\partial \psi(x,t)}{\partial t} = \left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x) - g_{1D}|\psi(x,t)|^2\right)\psi(x,t)$$
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted font-mono">
+              Focus: Multi-component Gross-Pitaevskii equations (GPE), collisional phase stability, and second-order Bogoliubov fluctuations.
+            </div>
+          </div>
+
+          <div class="ledger-box p-5">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+              <span class="font-bold text-xs uppercase">Real-Time Stochastic FCIQMC Dynamics</span>
+              <span class="stamp stamp-verified">RIMU.JL</span>
+            </div>
+            <p class="text-xs leading-relaxed text-paper-carbon dark:text-terminal-fg mb-3">
+              Full Configuration Interaction Quantum Monte Carlo (FCIQMC) resolves exponential Hilbert spaces via walker populations. Extending this to unitary real-time evolution introduces severe sign cancellation:
+            </p>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-center font-mono text-xs overflow-x-auto my-3">
+              $$\frac{d C_{\mathbf{i}}(t)}{dt} = -i \sum_{\mathbf{j}} H_{\mathbf{i}\mathbf{j}} C_{\mathbf{j}}(t) - S(t) C_{\mathbf{i}}(t)$$
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted font-mono">
+              Innovation: Stabilizing `LeapfrogComplex` propagators via the `InternalCoherence` post-step algorithm developed in `RimuRealTime.jl`.
+            </div>
+          </div>
+
+          <div class="ledger-box p-5">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+              <span class="font-bold text-xs uppercase">1D Extended Fermi-Hubbard Lattice</span>
+              <span class="stamp stamp-verified">CORRELATED FERMIONS</span>
+            </div>
+            <p class="text-xs leading-relaxed text-paper-carbon dark:text-terminal-fg mb-3">
+              Investigation of competing on-site repulsion ($U$) and nearest-neighbor interaction ($V$) in strongly correlated one-dimensional fermionic lattices subjected to non-Hermitian hoppings:
+            </p>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-center font-mono text-xs overflow-x-auto my-3">
+              $$H = -t\sum_{\langle i,j \rangle,\sigma}(c_{i\sigma}^\dagger c_{j\sigma} + \text{h.c.}) + U\sum_i n_{i\uparrow}n_{i\downarrow} + V\sum_{\langle i,j \rangle} n_i n_j$$
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted font-mono">
+              Focus: Charge-density-wave (CDW) vs Spin-density-wave (SDW) phases, Floquet periodic driving, and biorthogonal spectral signatures.
+            </div>
+          </div>
+
+          <div class="ledger-box p-5">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+              <span class="font-bold text-xs uppercase">Matrix Product States &amp; DMRG</span>
+              <span class="stamp stamp-verified">TENSOR NETWORKS</span>
+            </div>
+            <p class="text-xs leading-relaxed text-paper-carbon dark:text-terminal-fg mb-3">
+              Entanglement entropy bounds in one-dimensional systems permit efficient Matrix Product State (MPS) representations of ground states and time-evolved quantum states via DMRG:
+            </p>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-center font-mono text-xs overflow-x-auto my-3">
+              $$|\Psi\rangle = \sum_{\{\sigma_i\}} A^{\sigma_1} A^{\sigma_2} \cdots A^{\sigma_L} |\sigma_1 \sigma_2 \cdots \sigma_L\rangle$$
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted font-mono">
+              Focus: Truncation errors under time-dependent DMRG (t-DMRG) during non-equilibrium quantum quenches.
+            </div>
+        </div>
+
+        <!-- CODE-GENERATED ANALOG GRAPHIC: SOLITON COLLISION SPATIAL-TEMPORAL PHASE TRAJECTORY -->
+        <div class="ledger-box p-6 my-8 text-center font-mono">
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 text-xs">
+            <div class="font-bold flex items-center gap-2">
+              <span class="text-paper-red dark:text-terminal-amber">ARCHIVAL PLATE 02-B</span>
+              <span class="opacity-50">//</span>
+              <span>SPACETIME TRAJECTORY &amp; COLLISIONAL PHASE SHIFT ($\Delta\theta$)</span>
+            </div>
+            <span class="stamp stamp-converged">NUMERICAL GPE</span>
+          </div>
+
+          <div class="flex justify-center my-4 overflow-x-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="560" height="320" class="max-w-full h-auto">
+              <g stroke="currentColor" stroke-width="0.5" opacity="0.15">
+                <line x1="50" y1="40" x2="550" y2="40" /><line x1="50" y1="100" x2="550" y2="100" />
+                <line x1="50" y1="160" x2="550" y2="160" /><line x1="50" y1="220" x2="550" y2="220" />
+                <line x1="50" y1="280" x2="550" y2="280" /><line x1="100" y1="20" x2="100" y2="300" />
+                <line x1="200" y1="20" x2="200" y2="300" /><line x1="300" y1="20" x2="300" y2="300" />
+                <line x1="400" y1="20" x2="400" y2="300" /><line x1="500" y1="20" x2="500" y2="300" />
+              </g>
+              <line x1="50" y1="160" x2="560" y2="160" stroke="currentColor" stroke-width="1.5" />
+              <polygon points="565,160 555,156 555,164" fill="currentColor" />
+              <text x="560" y="180" font-family="monospace" font-size="11" fill="currentColor">x (Position)</text>
+              <line x1="300" y1="310" x2="300" y2="15" stroke="currentColor" stroke-width="1.5" />
+              <polygon points="300,10 296,20 304,20" fill="currentColor" />
+              <text x="310" y="22" font-family="monospace" font-size="11" fill="currentColor">t (Time)</text>
+
+              <line x1="120" y1="290" x2="480" y2="30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.35" />
+              <line x1="480" y1="290" x2="120" y2="30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.35" />
+
+              <path d="M 120,290 L 270,175 Q 300,160 330,145 L 496,25" fill="none" stroke="#942A27" stroke-width="2.5" />
+              <path d="M 480,290 L 330,175 Q 300,160 270,145 L 104,25" fill="none" stroke="#1D4ED8" stroke-width="2.5" />
+
+              <ellipse cx="300" cy="160" rx="36" ry="24" fill="#942A27" opacity="0.15" />
+              <ellipse cx="300" cy="160" rx="20" ry="14" fill="#1D4ED8" opacity="0.2" />
+
+              <path d="M 282,154 Q 300,150 318,154" fill="none" stroke="currentColor" stroke-width="1.2" />
+              <path d="M 276,160 Q 300,156 324,160" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path d="M 282,166 Q 300,162 318,166" fill="none" stroke="currentColor" stroke-width="1.2" />
+
+              <line x1="480" y1="30" x2="496" y2="25" stroke="#942A27" stroke-width="1.5" />
+              <line x1="480" y1="22" x2="480" y2="38" stroke="#942A27" stroke-width="1" />
+              <line x1="496" y1="17" x2="496" y2="33" stroke="#942A27" stroke-width="1" />
+              <text x="490" y="55" font-family="monospace" font-size="9" font-weight="bold" fill="#942A27" text-anchor="middle">+Δx Phase Shift</text>
+
+              <line x1="120" y1="30" x2="104" y2="25" stroke="#1D4ED8" stroke-width="1.5" />
+              <line x1="120" y1="22" x2="120" y2="38" stroke="#1D4ED8" stroke-width="1" />
+              <line x1="104" y1="17" x2="104" y2="33" stroke="#1D4ED8" stroke-width="1" />
+              <text x="110" y="55" font-family="monospace" font-size="9" font-weight="bold" fill="#1D4ED8" text-anchor="middle">-Δx Phase Shift</text>
+
+              <rect x="70" y="240" width="200" height="42" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="0.75" />
+              <text x="80" y="256" font-family="monospace" font-size="8.5" fill="currentColor">SOLITON 1: +v (INCIDENT)</text>
+              <text x="80" y="272" font-family="monospace" font-size="8" fill="#942A27">ψ₁(x,t) ∝ sech((x - vt)/ξ)</text>
+
+              <rect x="330" y="240" width="200" height="42" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="0.75" />
+              <text x="340" y="256" font-family="monospace" font-size="8.5" fill="currentColor">SOLITON 2: -v (INCIDENT)</text>
+              <text x="340" y="272" font-family="monospace" font-size="8" fill="#1D4ED8">ψ₂(x,t) ∝ sech((x + vt)/ξ)</text>
+
+              <text x="300" y="196" font-family="monospace" font-size="8.5" fill="currentColor" text-anchor="middle" font-weight="bold">COLLISION ZONE (t = 0, x = 0)</text>
+
+              <path d="M 15 30 L 15 15 L 30 15" fill="none" stroke="currentColor" stroke-width="1.2" />
+              <path d="M 585 30 L 585 15 L 570 15" fill="none" stroke="currentColor" stroke-width="1.2" />
+              <path d="M 15 310 L 15 325 L 30 325" fill="none" stroke="currentColor" stroke-width="1.2" />
+              <path d="M 585 310 L 585 325 L 570 325" fill="none" stroke="currentColor" stroke-width="1.2" />
+            </svg>
+          </div>
+
+          <div class="text-xs text-paper-margin dark:text-terminal-muted max-w-xl mx-auto leading-relaxed border-t border-paper-pencil dark:border-terminal-wire pt-3">
+            <strong>Analytical Derivation:</strong> In the integrable 1D Lieb-Liniger limit, the asymptotic spatial shift obeys $\Delta x = \frac{2\xi}{N} \ln\left(1 + \frac{4 v^2}{g_{1D}^2}\right)$. Solitons preserve their shape and velocity, acquiring only a net coordinate advancement.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: PUBLICATIONS & PREPRINTS -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">02 // BIBLIOGRAPHIC ARTICLES &amp; PREPRINTS</h2>
+          <span class="stamp stamp-archived">COLLAPSIBLE BIBTEX INCLUDED</span>
+        </div>
+
+        <div class="space-y-6 font-mono">
+          <!-- PAPER 1 -->
+          <div id="pub-fciqmc" class="ledger-box p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="stamp stamp-converged">[PREPRINT]</span>
+                <span class="text-xs text-paper-margin dark:text-terminal-muted">DOC-ID: JN-PUB-2026-01</span>
+              </div>
+              <div class="text-xs">YEAR: 2026 &bull; MASSEY UNIVERSITY</div>
+            </div>
+
+            <h3 class="text-base font-bold text-paper-carbon dark:text-terminal-fg mb-2">
+              Real-Time Dynamics in Configuration Interaction Quantum Monte Carlo: Stabilizing Stochastic Propagators
+            </h3>
+
+            <div class="text-xs text-paper-margin dark:text-terminal-muted mb-3">
+              <strong>Authors:</strong> Joachim Brand, <u>Jyotiraj Nath</u>, Matija Čufar, C. J. Bradly
+            </div>
+
+            <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+              Unitary real-time evolution within Full Configuration Interaction Quantum Monte Carlo suffers from rapid phase cancellation between complex walker populations. Here, we present the mathematical formulation of the <code>InternalCoherence</code> post-step strategy and demonstrate stable quantum propagation using <code>LeapfrogComplex</code> algorithms in open-source Julia.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs mb-3">
+              <a href="https://arxiv.org" target="_blank" class="text-paper-red dark:text-terminal-amber">[arXiv:2602.XXXXX]</a>
+              <span class="opacity-40">//</span>
+              <a href="/code/#rimu" class="text-paper-blue dark:text-terminal-cyan">[CODE IMPLEMENTATION]</a>
+            </div>
+
+            <details class="mt-4">
+              <summary>
+                <span>BIBTEX CITATION DOCKET</span>
+                <button class="copy-bibtex-btn btn-brutalist text-[10px] py-0.5 px-1.5" data-target="bibtex-1">
+                  [COPY BIBTEX]
+                </button>
+              </summary>
+              <div class="drawer-content">
+                <pre id="bibtex-1" class="text-[11px] p-2 bg-transparent text-paper-carbon dark:text-terminal-fg">@article&#123;brand2026realtime,
+  title=&#123;Real-Time Dynamics in Configuration Interaction Quantum Monte Carlo: Stabilizing Stochastic Propagators&#125;,
+  author=&#123;Brand, Joachim and Nath, Jyotiraj and \v&#123;C&#125;ufar, Matija and Bradly, C. J.&#125;,
+  journal=&#123;arXiv preprint arXiv:2602.XXXXX&#125;,
+  year=&#123;2026&#125;,
+  institution=&#123;Massey University, Auckland, New Zealand&#125;
+&#125;</pre>
+              </div>
+            </details>
+          </div>
+
+          <!-- PAPER 2 -->
+          <div id="pub-solitons" class="ledger-box p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="stamp stamp-review">[IN REVIEW]</span>
+                <span class="text-xs text-paper-margin dark:text-terminal-muted">DOC-ID: JN-PUB-2026-02</span>
+              </div>
+              <div class="text-xs">YEAR: 2026 &bull; MASSEY UNIVERSITY</div>
+            </div>
+
+            <h3 class="text-base font-bold text-paper-carbon dark:text-terminal-fg mb-2">
+              Collisional Phase Shifts and Quantum Fluctuations of Bright Solitons in Attractive BEC Waveguides
+            </h3>
+
+            <div class="text-xs text-paper-margin dark:text-terminal-muted mb-3">
+              <strong>Authors:</strong> <u>Jyotiraj Nath</u>, Ray Yang, Elke Pahl, Joachim Brand
+            </div>
+
+            <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+              We simulate low-velocity collisions of bright matter-wave solitons in tightly confined optical waveguides using a non-polynomial Gross-Pitaevskii solver. Quantum corrections and phase-delay asymptotic shifts are benchmarked against exact Bethe ansatz predictions for integrable Lieb-Liniger regimes.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs mb-3">
+              <span class="text-paper-margin dark:text-terminal-muted">[SUBMITTED TO PHYSICAL REVIEW A]</span>
+              <span class="opacity-40">//</span>
+              <a href="/essays/#solitons" class="text-paper-red dark:text-terminal-amber">[FIELD NOTE ESSAY]</a>
+            </div>
+
+            <details class="mt-4">
+              <summary>
+                <span>BIBTEX CITATION DOCKET</span>
+                <button class="copy-bibtex-btn btn-brutalist text-[10px] py-0.5 px-1.5" data-target="bibtex-2">
+                  [COPY BIBTEX]
+                </button>
+              </summary>
+              <div class="drawer-content">
+                <pre id="bibtex-2" class="text-[11px] p-2 bg-transparent text-paper-carbon dark:text-terminal-fg">@article&#123;nath2026collisional,
+  title=&#123;Collisional Phase Shifts and Quantum Fluctuations of Bright Solitons in Attractive BEC Waveguides&#125;,
+  author=&#123;Nath, Jyotiraj and Yang, Ray and Pahl, Elke and Brand, Joachim&#125;,
+  journal=&#123;Physical Review A (in review)&#125;,
+  year=&#123;2026&#125;,
+  publisher=&#123;APS&#125;
+&#125;</pre>
+              </div>
+            </details>
+          </div>
+
+          <!-- PAPER 3 -->
+          <div id="pub-inria" class="ledger-box p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="stamp stamp-verified">[INRIA MONOGRAPH]</span>
+                <span class="text-xs text-paper-margin dark:text-terminal-muted">DOC-ID: JN-INRIA-2025</span>
+              </div>
+              <div class="text-xs">YEAR: 2025 &bull; INRIA PARIS-SACLAY</div>
+            </div>
+
+            <h3 class="text-base font-bold text-paper-carbon dark:text-terminal-fg mb-2">
+              Algorithmic Synthesis of Fault-Tolerant Clifford+T Decompositions for Single-Qubit Unitaries
+            </h3>
+
+            <div class="text-xs text-paper-margin dark:text-terminal-muted mb-3">
+              <strong>Author:</strong> <u>Jyotiraj Nath</u> (Supervised at Inria Saclay, France)
+            </div>
+
+            <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+              Research monograph conducted during research fellowship at Inria Paris-Saclay (June–July 2025). Focuses on algorithmic gate synthesis routines converting arbitrary single-qubit rotations $R_z(\theta)$ into minimal-depth fault-tolerant Clifford+T sequences over cyclotomic integer rings $\mathbb{Z}[\zeta_8]$.
+            </p>
+
+            <details class="mt-4">
+              <summary>
+                <span>BIBTEX CITATION DOCKET</span>
+                <button class="copy-bibtex-btn btn-brutalist text-[10px] py-0.5 px-1.5" data-target="bibtex-3">
+                  [COPY BIBTEX]
+                </button>
+              </summary>
+              <div class="drawer-content">
+                <pre id="bibtex-3" class="text-[11px] p-2 bg-transparent text-paper-carbon dark:text-terminal-fg">@techreport&#123;nath2025algorithmic,
+  title=&#123;Algorithmic Synthesis of Fault-Tolerant Clifford+T Decompositions for Single-Qubit Unitaries&#125;,
+  author=&#123;Nath, Jyotiraj&#125;,
+  institution=&#123;Inria Paris-Saclay, Palaiseau, France&#125;,
+  year=&#123;2025&#125;,
+  type=&#123;Research Internship Monograph&#125;
+&#125;</pre>
+              </div>
+            </details>
+          </div>
+
+          <!-- PAPER 4 -->
+          <div id="pub-fermi-hubbard" class="ledger-box p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="stamp stamp-verified">[PEER-REVIEWED]</span>
+                <span class="text-xs text-paper-margin dark:text-terminal-muted">DOC-ID: JN-PUB-2024</span>
+              </div>
+              <div class="text-xs">YEAR: 2024 &bull; SVNIT COLLABORATION</div>
+            </div>
+
+            <h3 class="text-base font-bold text-paper-carbon dark:text-terminal-fg mb-2">
+              Biorthogonal Spectral Flow and Floquet Dynamics in the 1D Extended Fermi-Hubbard Chain
+            </h3>
+
+            <div class="text-xs text-paper-margin dark:text-terminal-muted mb-3">
+              <strong>Authors:</strong> <u>Jyotiraj Nath</u>, Prasanta K. Panigrahi, Bhaswati Singha Deo, Mayukha Pal, Shreya Banerjee
+            </div>
+
+            <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+              Theoretical characterization of non-Hermitian generalizations of the 1D extended Fermi-Hubbard model under time-periodic stroboscopic driving. Demonstrates non-reciprocal boundary accumulation and dynamical skin effects in correlated quantum lattices.
+            </p>
+
+            <details class="mt-4">
+              <summary>
+                <span>BIBTEX CITATION DOCKET</span>
+                <button class="copy-bibtex-btn btn-brutalist text-[10px] py-0.5 px-1.5" data-target="bibtex-4">
+                  [COPY BIBTEX]
+                </button>
+              </summary>
+              <div class="drawer-content">
+                <pre id="bibtex-4" class="text-[11px] p-2 bg-transparent text-paper-carbon dark:text-terminal-fg">@article&#123;nath2024biorthogonal,
+  title=&#123;Biorthogonal Spectral Flow and Floquet Dynamics in the 1D Extended Fermi-Hubbard Chain&#125;,
+  author=&#123;Nath, Jyotiraj and Panigrahi, Prasanta K. and Singha Deo, Bhaswati and Pal, Mayukha and Banerjee, Shreya&#125;,
+  journal=&#123;Journal of Physics: Condensed Matter&#125;,
+  volume=&#123;36&#125;,
+  pages=&#123;225601&#125;,
+  year=&#123;2024&#125;,
+  doi=&#123;10.1088/1361-648X/ad2a11&#125;
+&#125;</pre>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: ACADEMIC PEDIGREE & LEADERSHIP LEDGER -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">03 // ACADEMIC PEDIGREE &amp; LEADERSHIP LEDGER</h2>
+          <span class="stamp stamp-verified">[VERIFIED STAMPS]</span>
+        </div>
+
+        <div class="ledger-box overflow-hidden font-mono text-xs">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire">
+                <th class="p-3">PERIOD</th>
+                <th class="p-3">ROLE / APPOINTMENT</th>
+                <th class="p-3">INSTITUTION &amp; LOCATION</th>
+                <th class="p-3">STATUS</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-paper-pencil dark:divide-terminal-wire">
+              <tr>
+                <td class="p-3 font-bold text-paper-red dark:text-terminal-amber">Jan 2026 – Present</td>
+                <td class="p-3">Doctoral Researcher (PhD in Physics)</td>
+                <td class="p-3">Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Group</td>
+                <td class="p-3"><span class="stamp stamp-converged">ACTIVE CANDIDATE</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">Jun 2025 – Jul 2025</td>
+                <td class="p-3">Research Fellow / Intern</td>
+                <td class="p-3">Inria Paris-Saclay (Palaiseau, France) &bull; Quantum Gate Synthesis</td>
+                <td class="p-3"><span class="stamp stamp-verified">COMPLETED</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">2021 – 2025</td>
+                <td class="p-3">Master of Science in Physics</td>
+                <td class="p-3">SVNIT (Sardar Vallabhbhai National Institute of Technology, Surat, India)</td>
+                <td class="p-3"><span class="stamp stamp-verified">CONFERRED</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">2025</td>
+                <td class="p-3">Co-Organizer</td>
+                <td class="p-3">QSQT-2025 (Quantum Systems &amp; Quantum Technologies)</td>
+                <td class="p-3"><span class="stamp stamp-archived">ARCHIVED CONV.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle py-8 text-xs font-mono">
+      <div class="site-container flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        <div>
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg tracking-typewriter mb-1">
+            MASSEY UNIVERSITY THEORETICAL &amp; COMPUTATIONAL PHYSICS LAB
+          </div>
+          <div class="text-paper-margin dark:text-terminal-muted leading-relaxed">
+            School of Natural Sciences &bull; Prof. Joachim Brand Research Group<br />
+            Massey University Albany Campus, Private Bag 102 904, Auckland 0745, New Zealand.<br />
+            Primary: <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a> &bull; PGP: <span class="text-paper-red dark:text-terminal-amber">4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5 md:text-right">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">INDEX NETWORK</div>
+          <div class="flex flex-wrap md:justify-end gap-3">
+            <a href="https://github.com/jyotiraj-code" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://orcid.org/0009-0005-4705-7798" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-2">
+            STATION ARCHIVE &bull; NO TELEMETRY &bull; REVISION FFE919F
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- COMMAND PALETTE MODAL -->
+    <div id="cmdPaletteBackdrop" class="cmd-backdrop hidden no-print" aria-modal="true" role="dialog">
+      <div class="cmd-modal">
+        <div class="flex items-center justify-between px-4 py-2 bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire text-xs font-mono">
+          <div class="font-bold flex items-center gap-2">
+            <span class="text-paper-red dark:text-terminal-amber">CATALOG DISPATCH</span>
+            <span class="opacity-50">//</span>
+            <span>INDEX SEARCH</span>
+          </div>
+          <div class="opacity-60">[ESC TO EXIT]</div>
+        </div>
+        
+        <input
+          type="text"
+          id="cmdPaletteInput"
+          class="cmd-input font-mono"
+          placeholder="Type a domain, paper title, Julia module, or essay topic..."
+          autocomplete="off"
+        />
+
+        <div id="cmdPaletteResults" class="cmd-results font-mono"></div>
+
+        <div class="px-4 py-2 border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle flex items-center justify-between text-[11px] font-mono text-paper-margin dark:text-terminal-muted">
+          <div>↑↓ TO NAVIGATE &bull; ENTER TO RETRIEVE</div>
+          <div>SEARCHING 18+ ARCHIVAL ENTRIES</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js" defer></script>
+    <script src="/js/sitemap-graph.js" defer></script>
+  </body>
+</html>
+

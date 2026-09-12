@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Machine Colophon & Technical Manifesto" currentPath="/colophon/">
+  <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+    <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+      <span>SECTION 07</span>
+      <span>//</span>
+      <span>MACHINE SPECIFICATIONS &amp; DESIGN TENETS</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">MACHINE COLOPHON &amp; ARCHITECTURAL MANIFESTO</h1>
+    <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+      Exacting ledger of hardware machines, terminal multiplexers, editor buffers, and the philosophical manifesto governing this digital archive.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+    <!-- LEFT: HARDWARE & ENVIRONMENT SPECIFICATIONS -->
+    <div class="lg:col-span-6 space-y-6 font-mono text-xs">
+      <!-- HARDWARE SPEC -->
+      <div id="hardware" class="ledger-box p-6">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+          <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">PHYSICAL HARDWARE SPECIFICATIONS</span>
+          <span class="stamp stamp-verified">[PRIMARY RIG]</span>
+        </div>
+
+        <div class="space-y-3">
+          <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+            <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">
+              PRIMARY WORKSTATION: APPLE MACBOOK AIR 13.6"
+            </div>
+            <ul class="text-[11px] space-y-1 text-paper-carbon dark:text-terminal-fg">
+              <li>&bull; Processor: Apple Silicon M2 (8-core CPU: 4 performance + 4 efficiency)</li>
+              <li>&bull; Memory: 8 GB Unified LPDDR5 Memory (100 GB/s bandwidth)</li>
+              <li>&bull; Storage: 256 GB High-Speed NVMe Solid State Drive</li>
+              <li>&bull; Colorway: Space Grey anodized aluminum</li>
+              <li>&bull; Display: 13.6" Liquid Retina (2560x1664 native resolution, P3 wide color)</li>
+            </ul>
+          </div>
+
+          <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+            <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">
+              MOBILE DOSSIER: GOOGLE PIXEL 8
+            </div>
+            <ul class="text-[11px] space-y-1 text-paper-carbon dark:text-terminal-fg">
+              <li>&bull; SoC: Google Tensor G3 &bull; 8 GB LPDDR5X</li>
+              <li>&bull; Camera: 50 MP Octa PD primary sensor (f/1.68)</li>
+              <li>&bull; Role: Field photography, GPS telemetry logs, 2FA hardware authentication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENVIRONMENT SPEC -->
+      <div class="ledger-box p-6">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+          <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">TERMINAL &amp; SOFTWARE WORKSPACE</span>
+          <span class="stamp stamp-converged">[TERMINAL BOUND]</span>
+        </div>
+
+        <ul class="space-y-3 text-[11px]">
+          <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+            <strong class="text-paper-red dark:text-terminal-amber">Editor:</strong> Neovim 0.10+ configured entirely in Lua. Treesitter syntax parsing, LSP-Zero integration for Julia (LanguageServer.jl), Python (Pyright/Ruff), and LaTeX.
+          </li>
+          <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+            <strong class="text-paper-red dark:text-terminal-amber">Multiplexer &amp; Shell:</strong> WezTerm with GPU-accelerated rendering and custom brutalist statusline; iTerm2 auxiliary; Zsh with minimal prompt (execution time + git rev).
+          </li>
+          <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+            <strong class="text-paper-red dark:text-terminal-amber">HPC Clusters:</strong> Slurm Workload Manager on Massey University and NeSI (New Zealand eScience Infrastructure) Mahuika/Māui nodes.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RIGHT: DESIGN SYSTEM & PHILOSOPHICAL MANIFESTO -->
+    <div class="lg:col-span-6 space-y-6">
+      <div class="ledger-box p-6 md:p-8">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 font-mono text-xs">
+          <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">ARCHITECTURAL DESIGN MANIFESTO</span>
+          <span class="stamp stamp-verified">[ZERO TRACKING]</span>
+        </div>
+
+        <div class="prose-editorial text-xs leading-relaxed space-y-4">
+          <p>
+            The modern web is congested with bloated client-side bundles, parasitic user telemetry, cookie consent banners, and floaty consumer animations that treat readers as algorithmic consumers rather than intellectual peers.
+          </p>
+          <p>
+            This digital ledger rejects those conventions. It is constructed upon five deliberate principles:
+          </p>
+          <ol class="space-y-3 pl-4 list-decimal font-mono text-xs text-paper-carbon dark:text-terminal-fg">
+            <li>
+              <strong>Tactile Analog Materiality:</strong> The layout evokes mid-century academic journals, lab notebooks, and mechanical typewriter consoles. Borders are strictly 1px; margins are calibrated to ledger grid dimensions.
+            </li>
+            <li>
+              <strong>Intellectual Density:</strong> Content is presented with unapologetic rigor. Mathematical equations, Slurm scripts, and Julia kernels are rendered with full precision via KaTeX.
+            </li>
+            <li>
+              <strong>Zero Telemetry:</strong> No analytics trackers, no Google Tag Manager, no Facebook pixels, no fingerprinting scripts. Your visit leaves no surveillance exhaust.
+            </li>
+            <li>
+              <strong>Static First Performance:</strong> Every page is static HTML/CSS/JS. Assets load instantly from edge caches with minimal CPU overhead.
+            </li>
+            <li>
+              <strong>Print Fidelity:</strong> Pressing <code>Cmd + P</code> activates a dedicated physical laboratory print stylesheet, transforming the screen into a ready-to-sign archival ledger sheet.
+            </li>
+          </ol>
+        </div>
+
+        <!-- TYPOGRAPHY & COLOR SWATCHES -->
+        <div class="mt-6 pt-4 border-t border-paper-pencil dark:border-terminal-wire font-mono text-xs">
+          <div class="font-bold uppercase tracking-wider mb-3">PALETTE TOKENS &amp; SWATCHES</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
+            <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #F5F2EB; color: #1A1A1C;">
+              #F5F2EB<br />Archival Paper
+            </div>
+            <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #1A1A1C; color: #F5F2EB;">
+              #1A1A1C<br />Carbon Ink
+            </div>
+            <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #942A27; color: #FFFFFF;">
+              #942A27<br />Ribbon Red
+            </div>
+            <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #0F0F10; color: #10B981;">
+              #0F0F10<br />Terminal Dark
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+

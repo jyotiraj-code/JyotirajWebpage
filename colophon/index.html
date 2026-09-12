@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Colophon &amp; Design Manifesto // JYOTIRAJ NATH ARCHIVE</title>
+    <meta name="description" content="Hardware specs (MacBook Air M2, Pixel 8), Neovim/WezTerm setup, and brutalist zero-telemetry design manifesto." />
+    <meta name="author" content="Jyotiraj (Raj) Nath" />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="phosphor"]'],
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                bg: '#F5F2EB',
+                subtle: '#EDE8DE',
+                card: '#FAF8F5',
+                carbon: '#1A1A1C',
+                pencil: '#D1CBBF',
+                margin: '#8C857B',
+                red: '#942A27',
+                blue: '#1D4ED8',
+                green: '#2D5A27',
+              },
+              terminal: {
+                bg: '#0F0F10',
+                subtle: '#18181A',
+                fg: '#E2E0D8',
+                muted: '#6B7280',
+                wire: '#28282C',
+                amber: '#D97706',
+                phosphor: '#059669',
+                crimson: '#DC2626',
+                cyan: '#0284C7',
+              }
+            },
+            fontFamily: {
+              mono: ['"Courier Prime"', '"IBM Plex Mono"', '"Space Mono"', 'monospace'],
+              serif: ['Newsreader', '"EB Garamond"', 'serif'],
+            },
+            letterSpacing: {
+              typewriter: '0.08em',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <script>
+      const savedTheme = localStorage.getItem('jyotiraj_archival_theme');
+      if (savedTheme === 'phosphor') {
+        document.documentElement.setAttribute('data-theme', 'phosphor');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="w-full border-b border-paper-pencil dark:border-terminal-wire bg-paper-bg dark:bg-terminal-bg relative z-20 mb-8">
+      <div class="site-container py-3 border-b border-paper-pencil dark:border-terminal-wire">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs font-mono">
+          <div>
+            <div class="font-bold text-sm tracking-typewriter text-paper-carbon dark:text-terminal-fg flex items-center gap-2">
+              <span>JYOTIRAJ (RAJ) NATH</span>
+              <span class="opacity-40">//</span>
+              <span class="text-paper-red dark:text-terminal-amber">DOC-ID: JN-MASSEY-PHYS</span>
+              <span class="hidden sm:inline-block stamp stamp-verified text-[10px] py-0 px-1.5">[CONVERGED]</span>
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-0.5">
+              Doctoral Researcher, Theoretical &amp; Computational Physics &bull; Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Research Group
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 text-[11px]">
+            <div class="stamp stamp-archived" id="nzstClock">
+              2026-09-12 23:15:00 NZST
+            </div>
+            <div class="stamp stamp-archived hidden sm:inline-flex">
+              rev: <span class="text-paper-red dark:text-terminal-amber">ffe919f</span>
+            </div>
+            <div class="stamp stamp-archived" id="sessionUptime">
+              UPTIME: 00:00:00
+            </div>
+            <button id="cmdSearchTrigger" class="btn-brutalist text-[10px] py-1 px-2" title="Shortcut: Cmd+K">
+              [⌘K INDEX]
+            </button>
+            <button id="themeToggleBtn" class="btn-brutalist text-[10px] py-1 px-2">
+              MODE: [ARCHIVAL PAPER]
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOG NAVIGATION TABS -->
+      <nav class="site-container overflow-x-auto">
+        <div class="flex border-l border-paper-pencil dark:border-terminal-wire">
+          <a href="/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[01/</span><span>DOSSIER]</span></a>
+          <a href="/research/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[02/</span><span>RESEARCH]</span></a>
+          <a href="/code/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[03/</span><span>COMPUTATION]</span></a>
+          <a href="/learnings/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[04/</span><span>LEDGER]</span></a>
+          <a href="/essays/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[05/</span><span>ESSAYS]</span></a>
+          <a href="/archive/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[06/</span><span>ARCHIVE]</span></a>
+          <a href="/colophon/" class="nav-tab active"><span class="opacity-50 text-[10px] mr-1.5">[07/</span><span>COLOPHON]</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-container flex-grow pb-16">
+      <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+        <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+          <span>SECTION 07</span>
+          <span>//</span>
+          <span>MACHINE SPECIFICATIONS &amp; DESIGN TENETS</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">MACHINE COLOPHON &amp; ARCHITECTURAL MANIFESTO</h1>
+        <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+          Exacting ledger of hardware machines, terminal multiplexers, editor buffers, and the philosophical manifesto governing this digital archive.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+        <!-- LEFT: HARDWARE & ENVIRONMENT SPECIFICATIONS -->
+        <div class="lg:col-span-6 space-y-6 font-mono text-xs">
+          <div id="hardware" class="ledger-box p-6">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+              <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">PHYSICAL HARDWARE SPECIFICATIONS</span>
+              <span class="stamp stamp-verified">[PRIMARY RIG]</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+                <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">
+                  PRIMARY WORKSTATION: APPLE MACBOOK AIR 13.6"
+                </div>
+                <ul class="text-[11px] space-y-1 text-paper-carbon dark:text-terminal-fg">
+                  <li>&bull; Processor: Apple Silicon M2 (8-core CPU: 4 performance + 4 efficiency)</li>
+                  <li>&bull; Memory: 8 GB Unified LPDDR5 Memory (100 GB/s bandwidth)</li>
+                  <li>&bull; Storage: 256 GB High-Speed NVMe Solid State Drive</li>
+                  <li>&bull; Colorway: Space Grey anodized aluminum</li>
+                  <li>&bull; Display: 13.6" Liquid Retina (2560x1664 native resolution, P3 wide color)</li>
+                </ul>
+              </div>
+
+              <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+                <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">
+                  MOBILE DOSSIER: GOOGLE PIXEL 8
+                </div>
+                <ul class="text-[11px] space-y-1 text-paper-carbon dark:text-terminal-fg">
+                  <li>&bull; SoC: Google Tensor G3 &bull; 8 GB LPDDR5X</li>
+                  <li>&bull; Camera: 50 MP Octa PD primary sensor (f/1.68)</li>
+                  <li>&bull; Role: Field photography, GPS telemetry logs, 2FA hardware authentication</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="ledger-box p-6">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4">
+              <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">TERMINAL &amp; SOFTWARE WORKSPACE</span>
+              <span class="stamp stamp-converged">[TERMINAL BOUND]</span>
+            </div>
+
+            <ul class="space-y-3 text-[11px]">
+              <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+                <strong class="text-paper-red dark:text-terminal-amber">Editor:</strong> Neovim 0.10+ configured entirely in Lua. Treesitter syntax parsing, LSP-Zero integration for Julia (LanguageServer.jl), Python (Pyright/Ruff), and LaTeX.
+              </li>
+              <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+                <strong class="text-paper-red dark:text-terminal-amber">Multiplexer &amp; Shell:</strong> WezTerm with GPU-accelerated rendering and custom brutalist statusline; iTerm2 auxiliary; Zsh with minimal prompt (execution time + git rev).
+              </li>
+              <li class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+                <strong class="text-paper-red dark:text-terminal-amber">HPC Clusters:</strong> Slurm Workload Manager on Massey University and NeSI (New Zealand eScience Infrastructure) Mahuika/Māui nodes.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: DESIGN SYSTEM & PHILOSOPHICAL MANIFESTO -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="ledger-box p-6 md:p-8">
+            <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 font-mono text-xs">
+              <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">ARCHITECTURAL DESIGN MANIFESTO</span>
+              <span class="stamp stamp-verified">[ZERO TRACKING]</span>
+            </div>
+
+            <div class="prose-editorial text-xs leading-relaxed space-y-4">
+              <p>
+                The modern web is congested with bloated client-side bundles, parasitic user telemetry, cookie consent banners, and floaty consumer animations that treat readers as algorithmic consumers rather than intellectual peers.
+              </p>
+              <p>
+                This digital ledger rejects those conventions. It is constructed upon five deliberate principles:
+              </p>
+              <ol class="space-y-3 pl-4 list-decimal font-mono text-xs text-paper-carbon dark:text-terminal-fg">
+                <li>
+                  <strong>Tactile Analog Materiality:</strong> The layout evokes mid-century academic journals, lab notebooks, and mechanical typewriter consoles. Borders are strictly 1px; margins are calibrated to ledger grid dimensions.
+                </li>
+                <li>
+                  <strong>Intellectual Density:</strong> Content is presented with unapologetic rigor. Mathematical equations, Slurm scripts, and Julia kernels are rendered with full precision via KaTeX.
+                </li>
+                <li>
+                  <strong>Zero Telemetry:</strong> No analytics trackers, no Google Tag Manager, no Facebook pixels, no fingerprinting scripts. Your visit leaves no surveillance exhaust.
+                </li>
+                <li>
+                  <strong>Static First Performance:</strong> Every page is static HTML/CSS/JS. Assets load instantly from edge caches with minimal CPU overhead.
+                </li>
+                <li>
+                  <strong>Print Fidelity:</strong> Pressing <code>Cmd + P</code> activates a dedicated physical laboratory print stylesheet, transforming the screen into a ready-to-sign archival ledger sheet.
+                </li>
+              </ol>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-paper-pencil dark:border-terminal-wire font-mono text-xs">
+              <div class="font-bold uppercase tracking-wider mb-3">PALETTE TOKENS &amp; SWATCHES</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
+                <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #F5F2EB; color: #1A1A1C;">
+                  #F5F2EB<br />Archival Paper
+                </div>
+                <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #1A1A1C; color: #F5F2EB;">
+                  #1A1A1C<br />Carbon Ink
+                </div>
+                <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #942A27; color: #FFFFFF;">
+                  #942A27<br />Ribbon Red
+                </div>
+                <div class="p-2 border border-paper-pencil dark:border-terminal-wire text-center" style="background-color: #0F0F10; color: #10B981;">
+                  #0F0F10<br />Terminal Dark
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle py-8 text-xs font-mono">
+      <div class="site-container flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        <div>
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg tracking-typewriter mb-1">
+            MASSEY UNIVERSITY THEORETICAL &amp; COMPUTATIONAL PHYSICS LAB
+          </div>
+          <div class="text-paper-margin dark:text-terminal-muted leading-relaxed">
+            School of Natural Sciences &bull; Prof. Joachim Brand Research Group<br />
+            Massey University Albany Campus, Private Bag 102 904, Auckland 0745, New Zealand.<br />
+            Primary: <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a> &bull; PGP: <span class="text-paper-red dark:text-terminal-amber">4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5 md:text-right">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">INDEX NETWORK</div>
+          <div class="flex flex-wrap md:justify-end gap-3">
+            <a href="https://github.com/jyotiraj-code" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://orcid.org/0009-0005-4705-7798" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-2">
+            STATION ARCHIVE &bull; NO TELEMETRY &bull; REVISION FFE919F
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- COMMAND PALETTE MODAL -->
+    <div id="cmdPaletteBackdrop" class="cmd-backdrop hidden no-print" aria-modal="true" role="dialog">
+      <div class="cmd-modal">
+        <div class="flex items-center justify-between px-4 py-2 bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire text-xs font-mono">
+          <div class="font-bold flex items-center gap-2">
+            <span class="text-paper-red dark:text-terminal-amber">CATALOG DISPATCH</span>
+            <span class="opacity-50">//</span>
+            <span>INDEX SEARCH</span>
+          </div>
+          <div class="opacity-60">[ESC TO EXIT]</div>
+        </div>
+        
+        <input
+          type="text"
+          id="cmdPaletteInput"
+          class="cmd-input font-mono"
+          placeholder="Type a domain, paper title, Julia module, or essay topic..."
+          autocomplete="off"
+        />
+
+        <div id="cmdPaletteResults" class="cmd-results font-mono"></div>
+
+        <div class="px-4 py-2 border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle flex items-center justify-between text-[11px] font-mono text-paper-margin dark:text-terminal-muted">
+          <div>↑↓ TO NAVIGATE &bull; ENTER TO RETRIEVE</div>
+          <div>SEARCHING 18+ ARCHIVAL ENTRIES</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js" defer></script>
+    <script src="/js/sitemap-graph.js" defer></script>
+  </body>
+</html>
+

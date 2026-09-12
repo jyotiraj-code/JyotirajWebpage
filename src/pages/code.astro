@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NonHermitianLatticeDiagram from '../components/NonHermitianLatticeDiagram.astro';
+---
+
+<Layout title="Computation & Julia Machinery" currentPath="/code/">
+  <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+    <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+      <span>SECTION 03</span>
+      <span>//</span>
+      <span>HIGH-PERFORMANCE SCIENTIFIC COMPUTING</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">COMPUTATIONAL MACHINERY &amp; OPEN-SOURCE JULIA</h1>
+    <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+      Open-source physics packages, real-time FCIQMC algorithms, Slurm HPC cluster pipelines, and numerical toolsets.
+    </p>
+  </div>
+
+  <!-- SECTION 1: RIMU.JL & RIMUREALTIME.JL -->
+  <div id="rimu" class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">01 // SCIENTIFIC JULIA: RIMU.JL &amp; REAL-TIME FCIQMC</h2>
+      <span class="stamp stamp-verified">[MERGED PR #19]</span>
+    </div>
+
+    <div class="ledger-box p-6 mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-4">
+        <div>
+          <span class="font-bold text-base text-paper-carbon dark:text-terminal-fg">RimuRealTime.jl</span>
+          <span class="text-xs text-paper-margin dark:text-terminal-muted ml-2 font-mono">Real-time FCIQMC dynamics for Rimu.jl</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="stamp stamp-converged">JULIA 1.10+</span>
+          <a href="https://github.com/joachimbrand/Rimu.jl" target="_blank" class="stamp stamp-archived">GITHUB REPO ↗</a>
+        </div>
+      </div>
+
+      <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+        Full Configuration Interaction Quantum Monte Carlo (FCIQMC) has revolutionized ground-state calculations of strongly interacting quantum systems. However, real-time quantum dynamics governed by $e^{-iHt}$ suffer from the dynamic phase problem. Within the Brand research group, we developed <code>RimuRealTime.jl</code> to enable numerically stable unitary propagation using symplectic algorithms.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs font-mono">
+        <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+          <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">LeapfrogComplex</div>
+          <div class="text-paper-margin dark:text-terminal-muted">Symplectic second-order integrator splitting real and imaginary walker components over staggered time grids.</div>
+        </div>
+        <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+          <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">InternalCoherence</div>
+          <div class="text-paper-margin dark:text-terminal-muted">Post-step annihilation strategy filtering high-frequency noise without violating total particle conservation.</div>
+        </div>
+        <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+          <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">SignCorrelator</div>
+          <div class="text-paper-margin dark:text-terminal-muted">Custom observable monitoring the decay of walker phase coherence to detect onset of the sign collapse.</div>
+        </div>
+      </div>
+
+      <!-- JULIA CODE SNIPPET -->
+      <div class="border border-paper-pencil dark:border-terminal-wire overflow-hidden">
+        <div class="bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg px-4 py-2 text-xs font-mono flex items-center justify-between">
+          <span>src/strategies/internal_coherence.jl</span>
+          <span class="opacity-60">[JULIA KERNEL]</span>
+        </div>
+        <pre class="text-xs leading-relaxed p-4 m-0 overflow-x-auto"><code class="text-paper-bg dark:text-terminal-fg"># Implementation of InternalCoherence Post-Step Strategy for Real-Time FCIQMC
+# Joachim Brand Lab // Massey University (Auckland, NZ)
+
+using Rimu
+using Rimu.Hamiltonians
+import Rimu.Interfaces: post_step
+
+struct InternalCoherence&#123;T&lt;:AbstractFloat&#125; &lt;: PostStepStrategy
+    threshold::T
+    damping_factor::T
+end
+
+InternalCoherence(; threshold=0.05, damping_factor=0.98) = 
+    InternalCoherence(promote(threshold, damping_factor)...)
+
+@inline function post_step(strategy::InternalCoherence, step::Int, state::ComplexFciqmcState)
+    walkers = state.walker_vector
+    corr = compute_sign_correlator(walkers)
+    
+    # Check if stochastic phase oscillations have compromised signal-to-noise
+    if abs(corr) &lt; strategy.threshold
+        # Symplectically damp high-frequency orthogonal phase fluctuations
+        damp_orthogonal_phase!(walkers, strategy.damping_factor)
+    end
+    
+    return state
+end
+
+function compute_sign_correlator(w::AbstractVector&#123;Complex&#123;T&#125;&#125;) where T
+    real_sum = sum(real, w)
+    imag_sum = sum(imag, w)
+    norm_sq = sum(abs2, w)
+    return (real_sum^2 + imag_sum^2) / (norm_sq + eps(T))
+end</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ALGORITHMIC REPOSITORIES -->
+  <div id="fermi-hubbard" class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">02 // ALGORITHMIC TOOLSETS &amp; HAMILTONIAN SOLVERS</h2>
+      <span class="stamp stamp-converged">[TESTED SUITE]</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+      <!-- REPO 1 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">FermiHubbard1D.jl</span>
+            <span class="stamp stamp-verified">EXACT DIAG.</span>
+          </div>
+          <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+            High-performance Julia solver for 1D extended Fermi-Hubbard chains. Implements sparse Hamiltonian matrices, bitwise occupation basis generation, and Lanczos/Arnoldi iterations using <code>KrylovKit.jl</code>.
+          </p>
+          <ul class="space-y-1.5 text-[11px] mb-4">
+            <li>&bull; CDW and SDW structure factor computation</li>
+            <li>&bull; Non-Hermitian asymmetric hopping support</li>
+            <li>&bull; Multithreaded sparse-matrix vector multiplication</li>
+          </ul>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+          <span>DEPS: KrylovKit.jl, DataFrames.jl, JLD2.jl</span>
+          <span class="text-paper-red dark:text-terminal-amber">v0.4.2</span>
+        </div>
+      </div>
+
+      <!-- REPO 2 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">QuantumGateSynthesis</span>
+            <span class="stamp stamp-verified">INRIA 2025</span>
+          </div>
+          <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+            Algorithmic compiler synthesizing single-qubit unitaries $U \in SU(2)$ into exact and $\varepsilon$-approximate Clifford+T gate circuits. Developed during research at Inria Paris-Saclay.
+          </p>
+          <ul class="space-y-1.5 text-[11px] mb-4">
+            <li>&bull; Algebraic factoring in cyclotomic rings $\mathbb{Z}[\frac{1}{\sqrt{2}}, i]$</li>
+            <li>&bull; Canonical Matsumoto-Amano normal form verification</li>
+            <li>&bull; T-count and ancilla minimization algorithms</li>
+          </ul>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+          <span>STACK: Python, SymPy, Qiskit, Rust FFI</span>
+          <span class="text-paper-red dark:text-terminal-amber">v1.1.0</span>
+        </div>
+      </div>
+
+      <!-- REPO 3 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">VQE-QAOA-Workbench</span>
+            <span class="stamp stamp-converged">OPTIMIZATION</span>
+          </div>
+          <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+            Variational Quantum Eigensolver (VQE) and Quantum Approximate Optimization Algorithm (QAOA) benchmark suite comparing statevector backends against noisy shot simulation.
+          </p>
+          <ul class="space-y-1.5 text-[11px] mb-4">
+            <li>&bull; PennyLane &amp; PyTorch gradient descent backends</li>
+            <li>&bull; Quantum natural gradient (QNG) optimizer</li>
+            <li>&bull; Barren plateau avoidance strategies in deep ansatze</li>
+          </ul>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+          <span>STACK: PennyLane, PyTorch, SciPy</span>
+          <span class="text-paper-red dark:text-terminal-amber">v0.8.0</span>
+        </div>
+      </div>
+
+      <!-- REPO 4 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">GPE1D-Spectral</span>
+            <span class="stamp stamp-converged">SOLITONS</span>
+          </div>
+          <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+            Split-step Fourier spectral method solver for 1D and quasi-1D Gross-Pitaevskii equations with contact and non-local interaction potentials.
+          </p>
+          <ul class="space-y-1.5 text-[11px] mb-4">
+            <li>&bull; Symplectic 4th-order Yoshida time-stepping</li>
+            <li>&bull; Imaginary time ground-state preparation</li>
+            <li>&bull; Real-time soliton collision phase extraction</li>
+          </ul>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+          <span>STACK: Julia (FFTW.jl, Plots.jl)</span>
+          <span class="text-paper-red dark:text-terminal-amber">v1.2.1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CODE-GENERATED ANALOG GRAPHIC: 1D NON-HERMITIAN EXTENDED FERMI-HUBBARD SKIN EFFECT -->
+    <NonHermitianLatticeDiagram />
+  </div>
+
+  <!-- SECTION 3: SLURM & CLUSTER INFRASTRUCTURE -->
+  <div id="slurm" class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">03 // SLURM BATCH ORCHESTRATION &amp; HPC ARTIFACT PIPELINES</h2>
+      <span class="stamp stamp-archived">PRODUCTION CLUSTER DEPLOYMENT</span>
+    </div>
+
+    <div class="ledger-box p-6 mb-6">
+      <p class="text-xs font-mono text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+        Large-scale FCIQMC and Gross-Pitaevskii simulations require parameter sweeps spanning hundreds of coupling strengths ($g_{1D}$) and interaction regimes ($U/t, V/t$). Below is the standard Slurm job array template used across our Massey University HPC cluster nodes:
+      </p>
+
+      <div class="border border-paper-pencil dark:border-terminal-wire overflow-hidden mb-6">
+        <div class="bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg px-4 py-2 text-xs font-mono flex items-center justify-between">
+          <span>slurm_fciqmc_array.sbatch</span>
+          <span class="opacity-60">[BASH SLURM SCRIPT]</span>
+        </div>
+        <pre class="text-xs leading-relaxed p-4 m-0 overflow-x-auto"><code class="text-paper-bg dark:text-terminal-fg">#!/usr/bin/env bash
+# ==============================================================================
+# SLURM PRODUCTION SCRIPT // REAL-TIME FCIQMC DYNAMICS SWEEP
+# Joachim Brand Lab // Massey University Auckland
+# ==============================================================================
+#SBATCH --job-name=fciqmc_sweep
+#SBATCH --partition=parallel
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=32
+#SBATCH --cpus-per-task=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=128G
+#SBATCH --array=1-100%20
+#SBATCH --output=/nesi/nobackup/massey_phys/logs/%x_%A_%a.out
+#SBATCH --error=/nesi/nobackup/massey_phys/logs/%x_%A_%a.err
+
+module purge
+module load Julia/1.10.2-GCC-12.3.0
+module load OpenMPI/4.1.5-GCC-12.3.0
+
+export JULIA_NUM_THREADS=32
+export OPENBLAS_NUM_THREADS=32
+
+PARAM_FILE="config/sweep_parameters.csv"
+LINE=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "$PARAM_FILE")
+IFS=',' read -r RUN_ID G_COUPLING N_WALKERS DT T_MAX &lt;&lt;&lt; "$LINE"
+
+echo "=========================================================="
+echo "LAUNCHING TASK $SLURM_ARRAY_TASK_ID on $(hostname)"
+echo "PARAMETERS: G=$G_COUPLING, WALKERS=$N_WALKERS, DT=$DT, T_MAX=$T_MAX"
+echo "=========================================================="
+
+srun julia --project=@. scripts/run_realtime_fciqmc.jl \
+    --coupling "$G_COUPLING" \
+    --walkers "$N_WALKERS" \
+    --dt "$DT" \
+    --tmax "$T_MAX" \
+    --outdir "/nesi/nobackup/massey_phys/data/run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+
+echo "TASK $SLURM_ARRAY_TASK_ID COMPLETED AT $(date -u '+%Y-%m-%dT%H:%M:%SZ')"</code></pre>
+      </div>
+
+      <!-- SSH JUMP & LOCAL SYNC PIPELINE -->
+      <div class="border-t border-paper-pencil dark:border-terminal-wire pt-4 text-xs font-mono">
+        <div class="font-bold text-paper-red dark:text-terminal-amber mb-2">AUTOMATED ARTIFACT CACHING VIA SSH JUMP PROXY:</div>
+        <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-3">
+          To securely retrieve HDF5 / JLD2 simulation artifacts from remote Massey/NeSI supercomputers directly to local Neovim/Julia buffers without manual scp commands:
+        </p>
+        <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-[11px] overflow-x-auto">
+          <code>rsync -avz -e "ssh -J gateway.massey.ac.nz" node01:/nesi/nobackup/massey_phys/data/ ./scratch/artifacts/</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+

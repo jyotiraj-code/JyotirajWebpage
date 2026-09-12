@@ -1,0 +1,220 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="The Ledger: Learnings & Changelog" currentPath="/learnings/">
+  <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+    <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+      <span>SECTION 04</span>
+      <span>//</span>
+      <span>KNOWLEDGE REPOSITORY &amp; CONTINUOUS CHANGELOG</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">THE LEDGER: CONTINUOUS DISCOVERY &amp; MARGINALIA</h1>
+    <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+      Chronological technical logbook of mathematical insights, formal certifications, and analytical marginalia from foundational texts.
+    </p>
+  </div>
+
+  <!-- SECTION 1: CONTINUOUS MATHEMATICAL CHANGELOG -->
+  <div class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">01 // CONTINUOUS MATHEMATICAL &amp; ALGORITHMIC CHANGELOG</h2>
+      <span class="stamp stamp-converged">[LIVE LOG]</span>
+    </div>
+
+    <div class="space-y-6 font-mono text-xs">
+      <!-- LOG ENTRY 1 -->
+      <div class="ledger-box p-5 border-l-4 border-l-paper-red dark:border-l-terminal-amber">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            LOG #048 // BIORTHOGONAL SPECTRAL STABILITY IN NON-HERMITIAN EVOLUTIONS
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted">DATE: 2026-03-02 &bull; MASSEY LAB</div>
+        </div>
+        <p class="leading-relaxed text-paper-carbon dark:text-terminal-fg mb-2">
+          Under non-Hermitian Hamiltonians ($H \neq H^\dagger$), left and right eigenvectors cease to be mutually orthogonal. Standard inner products $\langle \psi | \psi \rangle$ blow up exponentially near exceptional points (EPs). Stable expectation values require strict biorthogonal normalization:
+        </p>
+        <div class="p-2 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire my-2 text-center">
+          $$\langle \tilde{\psi}_n^L | \psi_m^R \rangle = \delta_{nm}, \qquad \langle O(t) \rangle = \frac{\langle \psi_L(t) | O | \psi_R(t) \rangle}{\langle \psi_L(t) | \psi_R(t) \rangle}$$
+        </div>
+        <div class="text-[11px] text-paper-margin dark:text-terminal-muted">
+          <em>Verification:</em> Validated in <code>FermiHubbard1D.jl</code> with Hatano-Nelson non-reciprocal boundary conditions.
+        </div>
+      </div>
+
+      <!-- LOG ENTRY 2 -->
+      <div class="ledger-box p-5 border-l-4 border-l-paper-pencil dark:border-l-terminal-wire">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            LOG #047 // KRYLOV SUBSPACE DIMENSION TRUNCATION UNDER NON-UNITARY PROPAGATORS
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted">DATE: 2026-01-18 &bull; MASSEY LAB</div>
+        </div>
+        <p class="leading-relaxed text-paper-carbon dark:text-terminal-fg mb-2">
+          When approximating $e^{-i H \Delta t} v$ via Krylov subspace $\mathcal{K}_m(H, v) = \text{span}\{v, Hv, \dots, H^{m-1}v\}$, loss of numerical orthogonality during Arnoldi iterations grows rapidly when $\text{Im}(\lambda_k) \neq 0$. Standard single-pass Gram-Schmidt fails at $m > 35$. Implemented two-pass modified Gram-Schmidt with dynamic re-orthogonalization threshold $\tau = 10^{-12}$.
+        </p>
+        <div class="text-[11px] text-paper-margin dark:text-terminal-muted">
+          <em>Result:</em> Truncation error reduced by 4 orders of magnitude in dissipative Lindbladian quench simulations.
+        </div>
+      </div>
+
+      <!-- LOG ENTRY 3 -->
+      <div class="ledger-box p-5 border-l-4 border-l-paper-pencil dark:border-terminal-wire">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            LOG #046 // COMMUTATOR ERROR BOUNDS IN HIGHER-ORDER SUZUKI-TROTTER EVOLUTION
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted">DATE: 2025-11-09 &bull; MASSEY LAB</div>
+        </div>
+        <p class="leading-relaxed text-paper-carbon dark:text-terminal-fg mb-2">
+          Decomposing $H = A + B$ in digital quantum simulation introduces operator splitting error. For second-order symmetric Trotterization $S_2(\Delta t) = e^{\frac{\Delta t}{2} A} e^{\Delta t B} e^{\frac{\Delta t}{2} A}$:
+        </p>
+        <div class="p-2 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire my-2 text-center">
+          $$\|e^{(A+B)\Delta t} - S_2(\Delta t)\| \le \frac{\Delta t^3}{24} \left( \|[A, [A, B]]\| + 2\|[B, [A, B]]\| \right) + \mathcal{O}(\Delta t^4)$$
+        </div>
+        <div class="text-[11px] text-paper-margin dark:text-terminal-muted">
+          <em>Insight:</em> For 1D nearest-neighbor chains, interleaving odd and even bond operators bounds error independently of system length $L$.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CERTIFICATIONS & INSTITUTIONAL SUMMER SCHOOLS -->
+  <div class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">02 // VERIFIED CERTIFICATIONS &amp; ADVANCED SUMMER SCHOOLS</h2>
+      <span class="stamp stamp-verified">[CRYPTOGRAPHICALLY SEALED]</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+      <!-- CERT 1 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold">INRIA SACLAY</span>
+            <span class="stamp stamp-verified">[VERIFIED]</span>
+          </div>
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg mb-1">
+            Quantum Computing &amp; Fault-Tolerant Gate Compilation
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mb-3">
+            Inria Paris-Saclay &bull; Palaiseau, France &bull; 2025
+          </div>
+          <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4 text-[11px]">
+            Comprehensive curriculum on quantum error correction (surface codes), magic state distillation, and Clifford+T algebraic decomposition.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire text-[10px] text-paper-margin dark:text-terminal-muted break-all">
+          HASH: <span class="text-paper-red dark:text-terminal-amber">SHA256:7f3b89a24c1e089d...</span>
+        </div>
+      </div>
+
+      <!-- CERT 2 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold">NeSI HPC</span>
+            <span class="stamp stamp-verified">[VERIFIED]</span>
+          </div>
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg mb-1">
+            Advanced Slurm &amp; Parallel Julia on Supercomputers
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mb-3">
+            New Zealand eScience Infrastructure &bull; Auckland &bull; 2026
+          </div>
+          <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4 text-[11px]">
+            MPI/OpenMP hybrid scaling, high-throughput batch arrays, parallel memory profiling, and cluster topology optimization.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire text-[10px] text-paper-margin dark:text-terminal-muted break-all">
+          HASH: <span class="text-paper-red dark:text-terminal-amber">SHA256:4c9e12b79901aa34...</span>
+        </div>
+      </div>
+
+      <!-- CERT 3 -->
+      <div class="ledger-box p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+            <span class="font-bold">SVNIT SURAT</span>
+            <span class="stamp stamp-verified">[VERIFIED]</span>
+          </div>
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg mb-1">
+            Computational Many-Body Quantum Physics
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mb-3">
+            Department of Physics &bull; SVNIT &bull; 2024
+          </div>
+          <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4 text-[11px]">
+            Second quantization, Green's function methods, exact diagonalization, and quantum phase transitions in low-dimensional systems.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire text-[10px] text-paper-margin dark:text-terminal-muted break-all">
+          HASH: <span class="text-paper-red dark:text-terminal-amber">SHA256:9e10ff61b83d52c1...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE READING LEDGER -->
+  <div class="mb-12">
+    <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+      <h2 class="text-sm font-bold tracking-wider">03 // THE READING LEDGER: FOUNDATIONAL TEXTS &amp; MARGINALIA</h2>
+      <span class="stamp stamp-archived">[SYSTEMATIC STUDY]</span>
+    </div>
+
+    <div class="space-y-4 font-mono text-xs">
+      <!-- BOOK 1 -->
+      <div class="ledger-box p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-2">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            Bose-Einstein Condensation in Dilute Gases &bull; C. J. Pethick &amp; H. Smith
+          </div>
+          <span class="stamp stamp-converged">COMPLETE ANNOTATION</span>
+        </div>
+        <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-2">
+          <em>Marginalia:</em> The treatment of low-velocity solitonic excitations in Section 11 illustrates why quasi-1D geometry modifies the s-wave scattering length into an effective $g_{1D} = 2\hbar\omega_\perp a_s / (1 - C a_s / a_\perp)$. Crucial for calibrating our numerical soliton speeds in optical waveguides.
+        </p>
+      </div>
+
+      <!-- BOOK 2 -->
+      <div class="ledger-box p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-2">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            Quantum Phase Transitions &bull; Subir Sachdev
+          </div>
+          <span class="stamp stamp-converged">COMPLETE ANNOTATION</span>
+        </div>
+        <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-2">
+          <em>Marginalia:</em> The mapping between the 1D transverse field Ising model and free fermions via the Jordan-Wigner transformation serves as the analytical touchstone for verifying boundary skin modes in non-Hermitian extensions of the Fermi-Hubbard chain.
+        </p>
+      </div>
+
+      <!-- BOOK 3 -->
+      <div class="ledger-box p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-2">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            The Density-Matrix Renormalization Group in the Age of Matrix Product States &bull; Ulrich Schollwöck
+          </div>
+          <span class="stamp stamp-converged">ACTIVE REFERENCE</span>
+        </div>
+        <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-2">
+          <em>Marginalia:</em> Canonical forms (left/right normalized tensors) clarify why singular value decomposition (SVD) guarantees optimal truncation of Schmidt ranks in 1D. Time-evolving block decimation (TEBD) error scales directly with entanglement entropy growth $S(t) \sim t$.
+        </p>
+      </div>
+
+      <!-- BOOK 4 -->
+      <div class="ledger-box p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-2">
+          <div class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">
+            Quantum Computation and Quantum Information &bull; Michael A. Nielsen &amp; Isaac L. Chuang
+          </div>
+          <span class="stamp stamp-converged">REFERENCE</span>
+        </div>
+        <p class="text-paper-carbon dark:text-terminal-fg leading-relaxed mb-2">
+          <em>Marginalia:</em> Chapter 4 and 8: The Kraus representation of open quantum systems $\rho(t) = \sum_k E_k \rho(0) E_k^\dagger$ directly guides the derivation of non-Hermitian effective Hamiltonians $H_{\text{eff}} = H - \frac{i}{2} \sum_k L_k^\dagger L_k$ conditioned on null measurement records.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+

@@ -1,0 +1,80 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const tabs = [
+  { id: '01', name: 'DOSSIER', href: '/' },
+  { id: '02', name: 'RESEARCH', href: '/research/' },
+  { id: '03', name: 'COMPUTATION', href: '/code/' },
+  { id: '04', name: 'LEDGER', href: '/learnings/' },
+  { id: '05', name: 'ESSAYS', href: '/essays/' },
+  { id: '06', name: 'ARCHIVE', href: '/archive/' },
+  { id: '07', name: 'COLOPHON', href: '/colophon/' },
+];
+
+const isActive = (href: string) => {
+  if (href === '/' && (currentPath === '/' || currentPath === '')) return true;
+  if (href !== '/' && currentPath.startsWith(href)) return true;
+  return false;
+};
+---
+
+<header class="w-full border-b border-paper-pencil dark:border-terminal-wire bg-paper-bg dark:bg-terminal-bg relative z-20 mb-8">
+  <!-- TOP INDEX BAR -->
+  <div class="site-container py-3 border-b border-paper-pencil dark:border-terminal-wire">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs font-mono">
+      <div>
+        <div class="font-bold text-sm tracking-typewriter text-paper-carbon dark:text-terminal-fg flex items-center gap-2">
+          <span>JYOTIRAJ (RAJ) NATH</span>
+          <span class="opacity-40">//</span>
+          <span class="text-paper-red dark:text-terminal-amber">DOC-ID: JN-MASSEY-PHYS</span>
+          <span class="hidden sm:inline-block stamp stamp-verified text-[10px] py-0 px-1.5">[CONVERGED]</span>
+        </div>
+        <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-0.5">
+          Doctoral Researcher, Theoretical &amp; Computational Physics &bull; Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Research Group
+        </div>
+      </div>
+
+      <!-- SYSTEM READOUTS -->
+      <div class="flex flex-wrap items-center gap-2 text-[11px]">
+        <div class="stamp stamp-archived" id="nzstClock">
+          2026-09-12 23:15:00 NZST
+        </div>
+        <div class="stamp stamp-archived hidden sm:inline-flex">
+          rev: <span class="text-paper-red dark:text-terminal-amber">ffe919f</span>
+        </div>
+        <div class="stamp stamp-archived" id="sessionUptime">
+          UPTIME: 00:00:00
+        </div>
+        <button id="cmdSearchTrigger" class="btn-brutalist text-[10px] py-1 px-2" title="Shortcut: Cmd+K">
+          [⌘K INDEX]
+        </button>
+        <button id="themeToggleBtn" class="btn-brutalist text-[10px] py-1 px-2">
+          MODE: [ARCHIVAL PAPER]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOG NAVIGATION TABS -->
+  <nav class="site-container overflow-x-auto">
+    <div class="flex border-l border-paper-pencil dark:border-terminal-wire">
+      {tabs.map((tab) => {
+        const active = isActive(tab.href);
+        return (
+          <a
+            href={tab.href}
+            class={`nav-tab ${active ? 'active' : ''}`}
+          >
+            <span class="opacity-50 text-[10px] mr-1.5">[{tab.id}/</span>
+            <span>{tab.name}]</span>
+          </a>
+        );
+      })}
+    </div>
+  </nav>
+</header>
+

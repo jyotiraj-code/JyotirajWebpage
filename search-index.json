@@ -1,0 +1,156 @@
+[
+  {
+    "id": "nav-dossier",
+    "title": "[01/DOSSIER] Academic Dossier & Executive Coordinates",
+    "category": "NAVIGATION",
+    "summary": "Doctoral Researcher profile, Joachim Brand Group, research coordinates, terminal console.",
+    "url": "/"
+  },
+  {
+    "id": "nav-research",
+    "title": "[02/RESEARCH] Theoretical & Computational Physics Index",
+    "category": "NAVIGATION",
+    "summary": "Bose-Einstein condensates, bright solitons, GPE, 1D Fermi-Hubbard, FCIQMC, publications, BibTeX.",
+    "url": "/research/"
+  },
+  {
+    "id": "nav-code",
+    "title": "[03/COMPUTATION] Scientific Julia & Cluster Machinery",
+    "category": "NAVIGATION",
+    "summary": "Rimu.jl, RimuRealTime.jl, LeapfrogComplex, SignCorrelator, Slurm batch arrays, MPI scaling.",
+    "url": "/code/"
+  },
+  {
+    "id": "nav-ledger",
+    "title": "[04/LEDGER] Mathematical Changelog & Continuous Ledger",
+    "category": "NAVIGATION",
+    "summary": "Non-Hermitian numerical stability, Krylov subspace methods, Trotterization errors, reading list.",
+    "url": "/learnings/"
+  },
+  {
+    "id": "nav-essays",
+    "title": "[05/ESSAYS] Editorial Essays & Philosophical Field Notes",
+    "category": "NAVIGATION",
+    "summary": "NISQ hype critique, real-time FCIQMC sign problem, Julia mechanical elegance, solitonic dynamics.",
+    "url": "/essays/"
+  },
+  {
+    "id": "nav-archive",
+    "title": "[06/ARCHIVE] The Analog Archive & Off-Duty Disciplines",
+    "category": "NAVIGATION",
+    "summary": "Assamese poetry (Dapun), classical tabla talas, New Zealand terrain EXIF logs, drip coffee protocol.",
+    "url": "/archive/"
+  },
+  {
+    "id": "nav-colophon",
+    "title": "[07/COLOPHON] Machine Specifications & System Manifesto",
+    "category": "NAVIGATION",
+    "summary": "M2 MacBook Air hardware, Neovim Lua setup, WezTerm multiplexer, brutalist design tenets.",
+    "url": "/colophon/"
+  },
+  {
+    "id": "pub-fciqmc",
+    "title": "Real-Time Dynamics in Configuration Interaction Quantum Monte Carlo: Stabilizing Stochastic Propagators",
+    "category": "RESEARCH",
+    "summary": "Joachim Brand, Jyotiraj Nath, Matija Čufar, C. J. Bradly. Formulating InternalCoherence for LeapfrogComplex.",
+    "url": "/research/#pub-fciqmc"
+  },
+  {
+    "id": "pub-solitons",
+    "title": "Collisional Phase Shifts and Quantum Fluctuations of Bright Solitons in Attractive BEC Waveguides",
+    "category": "RESEARCH",
+    "summary": "Jyotiraj Nath, Ray Yang, Elke Pahl, Joachim Brand. Non-polynomial Gross-Pitaevskii solver with quantum corrections.",
+    "url": "/research/#pub-solitons"
+  },
+  {
+    "id": "pub-inria",
+    "title": "Algorithmic Synthesis of Fault-Tolerant Clifford+T Decompositions for Single-Qubit Unitaries",
+    "category": "RESEARCH",
+    "summary": "Inria Paris-Saclay Internship report. Exact canonical decomposition with minimal T-gate depth.",
+    "url": "/research/#pub-inria"
+  },
+  {
+    "id": "pub-fermi-hubbard",
+    "title": "Biorthogonal Spectral Flow and Floquet Dynamics in the 1D Extended Fermi-Hubbard Chain",
+    "category": "RESEARCH",
+    "summary": "Jyotiraj Nath, Prasanta K. Panigrahi, Bhaswati Singha Deo, Mayukha Pal. Non-Hermitian skin effect and quench dynamics.",
+    "url": "/research/#pub-fermi-hubbard"
+  },
+  {
+    "id": "code-rimu",
+    "title": "Rimu.jl & RimuRealTime.jl: Real-Time FCIQMC Dynamics",
+    "category": "COMPUTATION",
+    "summary": "Implementation of the InternalCoherence post-step strategy, LeapfrogComplex time evolver, and SignCorrelator observable.",
+    "url": "/code/#rimu"
+  },
+  {
+    "id": "code-slurm",
+    "title": "Slurm Job Array Infrastructure & MPI Scaling",
+    "category": "COMPUTATION",
+    "summary": "Production batch scripts, SSH jump configurations, automated artifact caching from remote HPC nodes.",
+    "url": "/code/#slurm"
+  },
+  {
+    "id": "code-fermi",
+    "title": "1D Extended Fermi-Hubbard Krylov Solver",
+    "category": "COMPUTATION",
+    "summary": "Julia-based exact diagonalization and Arnoldi iteration engine for correlated fermionic lattices.",
+    "url": "/code/#fermi-hubbard"
+  },
+  {
+    "id": "essay-nisq",
+    "title": "On the Illusions of NISQ Quantum Supremacy: A Physical Architect's Ledger",
+    "category": "ESSAYS",
+    "summary": "Critical examination of qubit coherence, non-unitary decoherence, fault-tolerance thresholds vs. analog quantum simulators.",
+    "url": "/essays/#nisq-supremacy"
+  },
+  {
+    "id": "essay-fciqmc",
+    "title": "Real-Time FCIQMC and the Sign Problem in Non-Equilibrium Condensed Matter",
+    "category": "ESSAYS",
+    "summary": "Why projector Monte Carlo faces phase cancellation in real time, and how InternalCoherence restores fidelity.",
+    "url": "/essays/#real-time-fciqmc"
+  },
+  {
+    "id": "essay-julia",
+    "title": "The Mechanical Elegance of Julia for Many-Body Quantum Dynamics",
+    "category": "ESSAYS",
+    "summary": "Why multiple dispatch, zero-cost abstractions, and generated functions surpass both C++ and Python in Hamiltonian physics.",
+    "url": "/essays/#julia-elegance"
+  },
+  {
+    "id": "archive-dapun",
+    "title": "Poetry: 'Dapun' (দাপোন — Mirror) [Assamese & English]",
+    "category": "ARCHIVE",
+    "summary": "Original bilingual poetry with authentic Assamese typography ('এতিয়াও সময় আছে...'), meter notes, and English translation.",
+    "url": "/archive/#poetry"
+  },
+  {
+    "id": "archive-tabla",
+    "title": "Acoustic Journal: Tabla Tala Transcriptions (Teental, Jhaptal, Keherwa)",
+    "category": "ARCHIVE",
+    "summary": "Classical rhythmic bols, harmonium pitch tuning frequencies, and listening logs (Zubeen Garg, Chris Isaak, Kummer).",
+    "url": "/archive/#tabla"
+  },
+  {
+    "id": "archive-terrain",
+    "title": "Field Photography & Terrain Logs (Queenstown, Aoraki, Hooker Valley, Piha)",
+    "category": "ARCHIVE",
+    "summary": "Analog-monochrome and natural film tone captures with complete EXIF dossiers and GPS coordinates.",
+    "url": "/archive/#terrain"
+  },
+  {
+    "id": "archive-coffee",
+    "title": "Extraction Protocol: Drip Bag Coffee (ES CHOCOLAT)",
+    "category": "ARCHIVE",
+    "summary": "Laboratory parameter curves: 92.5°C water temp, 1:15.5 brew ratio, 3-stage pour, strength split ledger.",
+    "url": "/archive/#coffee"
+  },
+  {
+    "id": "colophon-hw",
+    "title": "Machine Specifications: MacBook Air M2 & Google Pixel 8",
+    "category": "COLOPHON",
+    "summary": "Hardware specs, Neovim Lua environment, WezTerm multiplexer splits, zero tracking manifesto.",
+    "url": "/colophon/#hardware"
+  }
+]

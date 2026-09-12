@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computational Machinery &amp; Scientific Julia // JYOTIRAJ NATH ARCHIVE</title>
+    <meta name="description" content="Scientific Julia ecosystem (Rimu.jl, RimuRealTime.jl), Hamiltonian solvers (FermiHubbard1D), and Slurm batch array cluster orchestration." />
+    <meta name="author" content="Jyotiraj (Raj) Nath" />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: ['class', '[data-theme="phosphor"]'],
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                bg: '#F5F2EB',
+                subtle: '#EDE8DE',
+                card: '#FAF8F5',
+                carbon: '#1A1A1C',
+                pencil: '#D1CBBF',
+                margin: '#8C857B',
+                red: '#942A27',
+                blue: '#1D4ED8',
+                green: '#2D5A27',
+              },
+              terminal: {
+                bg: '#0F0F10',
+                subtle: '#18181A',
+                fg: '#E2E0D8',
+                muted: '#6B7280',
+                wire: '#28282C',
+                amber: '#D97706',
+                phosphor: '#059669',
+                crimson: '#DC2626',
+                cyan: '#0284C7',
+              }
+            },
+            fontFamily: {
+              mono: ['"Courier Prime"', '"IBM Plex Mono"', '"Space Mono"', 'monospace'],
+              serif: ['Newsreader', '"EB Garamond"', 'serif'],
+            },
+            letterSpacing: {
+              typewriter: '0.08em',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <script>
+      const savedTheme = localStorage.getItem('jyotiraj_archival_theme');
+      if (savedTheme === 'phosphor') {
+        document.documentElement.setAttribute('data-theme', 'phosphor');
+      }
+    </script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="w-full border-b border-paper-pencil dark:border-terminal-wire bg-paper-bg dark:bg-terminal-bg relative z-20 mb-8">
+      <div class="site-container py-3 border-b border-paper-pencil dark:border-terminal-wire">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs font-mono">
+          <div>
+            <div class="font-bold text-sm tracking-typewriter text-paper-carbon dark:text-terminal-fg flex items-center gap-2">
+              <span>JYOTIRAJ (RAJ) NATH</span>
+              <span class="opacity-40">//</span>
+              <span class="text-paper-red dark:text-terminal-amber">DOC-ID: JN-MASSEY-PHYS</span>
+              <span class="hidden sm:inline-block stamp stamp-verified text-[10px] py-0 px-1.5">[CONVERGED]</span>
+            </div>
+            <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-0.5">
+              Doctoral Researcher, Theoretical &amp; Computational Physics &bull; Massey University (Auckland, NZ) &bull; Prof. Joachim Brand Research Group
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 text-[11px]">
+            <div class="stamp stamp-archived" id="nzstClock">
+              2026-09-12 23:15:00 NZST
+            </div>
+            <div class="stamp stamp-archived hidden sm:inline-flex">
+              rev: <span class="text-paper-red dark:text-terminal-amber">ffe919f</span>
+            </div>
+            <div class="stamp stamp-archived" id="sessionUptime">
+              UPTIME: 00:00:00
+            </div>
+            <button id="cmdSearchTrigger" class="btn-brutalist text-[10px] py-1 px-2" title="Shortcut: Cmd+K">
+              [⌘K INDEX]
+            </button>
+            <button id="themeToggleBtn" class="btn-brutalist text-[10px] py-1 px-2">
+              MODE: [ARCHIVAL PAPER]
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOG NAVIGATION TABS -->
+      <nav class="site-container overflow-x-auto">
+        <div class="flex border-l border-paper-pencil dark:border-terminal-wire">
+          <a href="/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[01/</span><span>DOSSIER]</span></a>
+          <a href="/research/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[02/</span><span>RESEARCH]</span></a>
+          <a href="/code/" class="nav-tab active"><span class="opacity-50 text-[10px] mr-1.5">[03/</span><span>COMPUTATION]</span></a>
+          <a href="/learnings/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[04/</span><span>LEDGER]</span></a>
+          <a href="/essays/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[05/</span><span>ESSAYS]</span></a>
+          <a href="/archive/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[06/</span><span>ARCHIVE]</span></a>
+          <a href="/colophon/" class="nav-tab"><span class="opacity-50 text-[10px] mr-1.5">[07/</span><span>COLOPHON]</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-container flex-grow pb-16">
+      <div class="mb-8 border-b border-paper-pencil dark:border-terminal-wire pb-4">
+        <div class="flex items-center gap-2 text-xs font-mono text-paper-red dark:text-terminal-amber mb-1">
+          <span>SECTION 03</span>
+          <span>//</span>
+          <span>HIGH-PERFORMANCE SCIENTIFIC COMPUTING</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-typewriter">COMPUTATIONAL MACHINERY &amp; OPEN-SOURCE JULIA</h1>
+        <p class="text-xs font-mono text-paper-margin dark:text-terminal-muted mt-1">
+          Open-source physics packages, real-time FCIQMC algorithms, Slurm HPC cluster pipelines, and numerical toolsets.
+        </p>
+      </div>
+
+      <!-- SECTION 1: RIMU.JL & RIMUREALTIME.JL -->
+      <div id="rimu" class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">01 // SCIENTIFIC JULIA: RIMU.JL &amp; REAL-TIME FCIQMC</h2>
+          <span class="stamp stamp-verified">[MERGED PR #19]</span>
+        </div>
+
+        <div class="ledger-box p-6 mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-paper-pencil dark:border-terminal-wire pb-3 mb-4">
+            <div>
+              <span class="font-bold text-base text-paper-carbon dark:text-terminal-fg">RimuRealTime.jl</span>
+              <span class="text-xs text-paper-margin dark:text-terminal-muted ml-2 font-mono">Real-time FCIQMC dynamics for Rimu.jl</span>
+            </div>
+            <div class="flex gap-2">
+              <span class="stamp stamp-converged">JULIA 1.10+</span>
+              <a href="https://github.com/joachimbrand/Rimu.jl" target="_blank" class="stamp stamp-archived">GITHUB REPO ↗</a>
+            </div>
+          </div>
+
+          <p class="text-xs text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+            Full Configuration Interaction Quantum Monte Carlo (FCIQMC) has revolutionized ground-state calculations of strongly interacting quantum systems. However, real-time quantum dynamics governed by $e^{-iHt}$ suffer from the dynamic phase problem. Within the Brand research group, we developed <code>RimuRealTime.jl</code> to enable numerically stable unitary propagation using symplectic algorithms.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs font-mono">
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+              <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">LeapfrogComplex</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Symplectic second-order integrator splitting real and imaginary walker components over staggered time grids.</div>
+            </div>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+              <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">InternalCoherence</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Post-step annihilation strategy filtering high-frequency noise without violating total particle conservation.</div>
+            </div>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire">
+              <div class="font-bold text-paper-red dark:text-terminal-amber mb-1">SignCorrelator</div>
+              <div class="text-paper-margin dark:text-terminal-muted">Custom observable monitoring the decay of walker phase coherence to detect onset of the sign collapse.</div>
+            </div>
+          </div>
+
+          <div class="border border-paper-pencil dark:border-terminal-wire overflow-hidden">
+            <div class="bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg px-4 py-2 text-xs font-mono flex items-center justify-between">
+              <span>src/strategies/internal_coherence.jl</span>
+              <span class="opacity-60">[JULIA KERNEL]</span>
+            </div>
+            <pre class="text-xs leading-relaxed p-4 m-0 overflow-x-auto"><code class="text-paper-bg dark:text-terminal-fg"># Implementation of InternalCoherence Post-Step Strategy for Real-Time FCIQMC
+# Joachim Brand Lab // Massey University (Auckland, NZ)
+
+using Rimu
+using Rimu.Hamiltonians
+import Rimu.Interfaces: post_step
+
+struct InternalCoherence{T&lt;:AbstractFloat} &lt;: PostStepStrategy
+    threshold::T
+    damping_factor::T
+end
+
+InternalCoherence(; threshold=0.05, damping_factor=0.98) = 
+    InternalCoherence(promote(threshold, damping_factor)...)
+
+@inline function post_step(strategy::InternalCoherence, step::Int, state::ComplexFciqmcState)
+    walkers = state.walker_vector
+    corr = compute_sign_correlator(walkers)
+    
+    # Check if stochastic phase oscillations have compromised signal-to-noise
+    if abs(corr) &lt; strategy.threshold
+        # Symplectically damp high-frequency orthogonal phase fluctuations
+        damp_orthogonal_phase!(walkers, strategy.damping_factor)
+    end
+    
+    return state
+end
+
+function compute_sign_correlator(w::AbstractVector{Complex{T}}) where T
+    real_sum = sum(real, w)
+    imag_sum = sum(imag, w)
+    norm_sq = sum(abs2, w)
+    return (real_sum^2 + imag_sum^2) / (norm_sq + eps(T))
+end</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: ALGORITHMIC REPOSITORIES -->
+      <div id="fermi-hubbard" class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">02 // ALGORITHMIC TOOLSETS &amp; HAMILTONIAN SOLVERS</h2>
+          <span class="stamp stamp-converged">[TESTED SUITE]</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+          <div class="ledger-box p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+                <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">FermiHubbard1D.jl</span>
+                <span class="stamp stamp-verified">EXACT DIAG.</span>
+              </div>
+              <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+                High-performance Julia solver for 1D extended Fermi-Hubbard chains. Implements sparse Hamiltonian matrices, bitwise occupation basis generation, and Lanczos/Arnoldi iterations using <code>KrylovKit.jl</code>.
+              </p>
+              <ul class="space-y-1.5 text-[11px] mb-4">
+                <li>&bull; CDW and SDW structure factor computation</li>
+                <li>&bull; Non-Hermitian asymmetric hopping support</li>
+                <li>&bull; Multithreaded sparse-matrix vector multiplication</li>
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+              <span>DEPS: KrylovKit.jl, DataFrames.jl, JLD2.jl</span>
+              <span class="text-paper-red dark:text-terminal-amber">v0.4.2</span>
+            </div>
+          </div>
+
+          <div class="ledger-box p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+                <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">QuantumGateSynthesis</span>
+                <span class="stamp stamp-verified">INRIA 2025</span>
+              </div>
+              <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+                Algorithmic compiler synthesizing single-qubit unitaries $U \in SU(2)$ into exact and $\varepsilon$-approximate Clifford+T gate circuits. Developed during research at Inria Paris-Saclay.
+              </p>
+              <ul class="space-y-1.5 text-[11px] mb-4">
+                <li>&bull; Algebraic factoring in cyclotomic rings $\mathbb{Z}[\frac{1}{\sqrt{2}}, i]$</li>
+                <li>&bull; Canonical Matsumoto-Amano normal form verification</li>
+                <li>&bull; T-count and ancilla minimization algorithms</li>
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+              <span>STACK: Python, SymPy, Qiskit, Rust FFI</span>
+              <span class="text-paper-red dark:text-terminal-amber">v1.1.0</span>
+            </div>
+          </div>
+
+          <div class="ledger-box p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+                <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">VQE-QAOA-Workbench</span>
+                <span class="stamp stamp-converged">OPTIMIZATION</span>
+              </div>
+              <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+                Variational Quantum Eigensolver (VQE) and Quantum Approximate Optimization Algorithm (QAOA) benchmark suite comparing statevector backends against noisy shot simulation.
+              </p>
+              <ul class="space-y-1.5 text-[11px] mb-4">
+                <li>&bull; PennyLane &amp; PyTorch gradient descent backends</li>
+                <li>&bull; Quantum natural gradient (QNG) optimizer</li>
+                <li>&bull; Barren plateau avoidance strategies in deep ansatze</li>
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+              <span>STACK: PennyLane, PyTorch, SciPy</span>
+              <span class="text-paper-red dark:text-terminal-amber">v0.8.0</span>
+            </div>
+          </div>
+
+          <div class="ledger-box p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-3">
+                <span class="font-bold text-sm text-paper-carbon dark:text-terminal-fg">GPE1D-Spectral</span>
+                <span class="stamp stamp-converged">SOLITONS</span>
+              </div>
+              <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-4">
+                Split-step Fourier spectral method solver for 1D and quasi-1D Gross-Pitaevskii equations with contact and non-local interaction potentials.
+              </p>
+              <ul class="space-y-1.5 text-[11px] mb-4">
+                <li>&bull; Symplectic 4th-order Yoshida time-stepping</li>
+                <li>&bull; Imaginary time ground-state preparation</li>
+                <li>&bull; Real-time soliton collision phase extraction</li>
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-paper-pencil dark:border-terminal-wire flex items-center justify-between text-[11px]">
+              <span>STACK: Julia (FFTW.jl, Plots.jl)</span>
+              <span class="text-paper-red dark:text-terminal-amber">v1.2.1</span>
+            </div>
+        </div>
+
+        <!-- CODE-GENERATED ANALOG GRAPHIC: 1D NON-HERMITIAN EXTENDED FERMI-HUBBARD SKIN EFFECT -->
+        <div class="ledger-box p-6 my-8 text-center font-mono">
+          <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-4 text-xs">
+            <div class="font-bold flex items-center gap-2">
+              <span class="text-paper-red dark:text-terminal-amber">ARCHIVAL PLATE 03-C</span>
+              <span class="opacity-50">//</span>
+              <span>1D NON-HERMITIAN FERMI-HUBBARD SKIN EFFECT &amp; BOUNDARY ACCUMULATION</span>
+            </div>
+            <span class="stamp stamp-converged">LATTICE SPECTRUM</span>
+          </div>
+
+          <div class="flex justify-center my-4 overflow-x-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="560" height="224" class="max-w-full h-auto">
+              <line x1="50" y1="130" x2="550" y2="130" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.4" />
+
+              <g transform="translate(80, 130)">
+                <circle cx="0" cy="0" r="10" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+                <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">1</text>
+              </g>
+              <g transform="translate(170, 130)">
+                <circle cx="0" cy="0" r="11" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+                <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">2</text>
+              </g>
+              <g transform="translate(260, 130)">
+                <circle cx="0" cy="0" r="13" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+                <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">3</text>
+              </g>
+              <g transform="translate(350, 130)">
+                <circle cx="0" cy="0" r="16" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+                <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">4</text>
+              </g>
+              <g transform="translate(440, 130)">
+                <circle cx="0" cy="0" r="20" fill="var(--bg-subtle)" stroke="currentColor" stroke-width="1.5" />
+                <text x="0" y="4" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">5</text>
+              </g>
+              <g transform="translate(530, 130)">
+                <circle cx="0" cy="0" r="25" fill="#942A27" opacity="0.15" />
+                <circle cx="0" cy="0" r="25" fill="none" stroke="#942A27" stroke-width="2" />
+                <text x="0" y="5" font-family="monospace" font-size="11" font-weight="bold" fill="#942A27" text-anchor="middle">L=6</text>
+              </g>
+
+              <g stroke="#942A27" fill="#942A27" stroke-width="1.8">
+                <path d="M 98,118 Q 125,98 152,118" fill="none" /><polygon points="152,118 142,114 146,122" />
+                <path d="M 188,118 Q 215,98 242,118" fill="none" /><polygon points="242,118 232,114 236,122" />
+                <path d="M 278,118 Q 305,98 332,118" fill="none" /><polygon points="332,118 322,114 326,122" />
+                <path d="M 368,118 Q 395,98 422,118" fill="none" /><polygon points="422,118 412,114 416,122" />
+                <path d="M 458,118 Q 485,98 512,118" fill="none" /><polygon points="512,118 502,114 506,122" />
+              </g>
+              <text x="305" y="86" font-family="monospace" font-size="9" font-weight="bold" fill="#942A27" text-anchor="middle">
+                FORWARD HOPPING: t_R = t &bull; e^{+γ} (AMPLIFIED)
+              </text>
+
+              <g stroke="#1D4ED8" fill="#1D4ED8" stroke-width="1" opacity="0.6">
+                <path d="M 152,142 Q 125,158 98,142" fill="none" /><polygon points="98,142 108,146 104,138" />
+                <path d="M 242,142 Q 215,158 188,142" fill="none" /><polygon points="188,142 198,146 194,138" />
+                <path d="M 332,142 Q 305,158 278,142" fill="none" /><polygon points="278,142 288,146 284,138" />
+                <path d="M 422,142 Q 395,158 368,142" fill="none" /><polygon points="368,142 378,146 374,138" />
+                <path d="M 512,142 Q 485,158 458,142" fill="none" /><polygon points="458,142 468,146 464,138" />
+              </g>
+              <text x="305" y="180" font-family="monospace" font-size="9" fill="#1D4ED8" text-anchor="middle">
+                BACKWARD HOPPING: t_L = t &bull; e^{-γ} (SUPPRESSED)
+              </text>
+
+              <path d="M 80,45 Q 260,42 440,28 T 530,5" fill="none" stroke="#942A27" stroke-width="1.8" stroke-dasharray="3 2" />
+              <text x="530" y="22" font-family="monospace" font-size="8.5" font-weight="bold" fill="#942A27" text-anchor="end">
+                |ψ_R(x)|² ∝ exp(2γx)
+              </text>
+
+              <line x1="560" y1="60" x2="560" y2="200" stroke="currentColor" stroke-width="2" />
+              <line x1="560" y1="70" x2="570" y2="60" stroke="currentColor" stroke-width="1" />
+              <line x1="560" y1="100" x2="570" y2="90" stroke="currentColor" stroke-width="1" />
+              <line x1="560" y1="130" x2="570" y2="120" stroke="currentColor" stroke-width="1" />
+              <line x1="560" y1="160" x2="570" y2="150" stroke="currentColor" stroke-width="1" />
+              <line x1="560" y1="190" x2="570" y2="180" stroke="currentColor" stroke-width="1" />
+              <text x="568" y="212" font-family="monospace" font-size="8" fill="currentColor">HARD WALL</text>
+
+              <path d="M 15 25 L 15 15 L 25 15" fill="none" stroke="currentColor" stroke-width="1" />
+              <path d="M 585 25 L 585 15 L 575 15" fill="none" stroke="currentColor" stroke-width="1" />
+              <path d="M 15 215 L 15 225 L 25 225" fill="none" stroke="currentColor" stroke-width="1" />
+              <path d="M 585 215 L 585 225 L 575 225" fill="none" stroke="currentColor" stroke-width="1" />
+            </svg>
+          </div>
+
+          <div class="text-xs text-paper-margin dark:text-terminal-muted max-w-xl mx-auto leading-relaxed border-t border-paper-pencil dark:border-terminal-wire pt-3">
+            <strong>Non-Hermitian Skin Effect:</strong> Under open boundary conditions, non-reciprocal hoppings ($\gamma > 0$) force an extensive number of bulk eigenstates to collapse exponentially onto the boundary manifold, fundamentally altering the bulk-boundary correspondence.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: SLURM & CLUSTER INFRASTRUCTURE -->
+      <div id="slurm" class="mb-12">
+        <div class="flex items-center justify-between border-b border-paper-pencil dark:border-terminal-wire pb-2 mb-6">
+          <h2 class="text-sm font-bold tracking-wider">03 // SLURM BATCH ORCHESTRATION &amp; HPC ARTIFACT PIPELINES</h2>
+          <span class="stamp stamp-archived">PRODUCTION CLUSTER DEPLOYMENT</span>
+        </div>
+
+        <div class="ledger-box p-6 mb-6">
+          <p class="text-xs font-mono text-paper-carbon dark:text-terminal-fg leading-relaxed mb-4">
+            Large-scale FCIQMC and Gross-Pitaevskii simulations require parameter sweeps spanning hundreds of coupling strengths ($g_{1D}$) and interaction regimes ($U/t, V/t$). Below is the standard Slurm job array template used across our Massey University HPC cluster nodes:
+          </p>
+
+          <div class="border border-paper-pencil dark:border-terminal-wire overflow-hidden mb-6">
+            <div class="bg-paper-carbon dark:bg-terminal-subtle text-paper-bg dark:text-terminal-fg px-4 py-2 text-xs font-mono flex items-center justify-between">
+              <span>slurm_fciqmc_array.sbatch</span>
+              <span class="opacity-60">[BASH SLURM SCRIPT]</span>
+            </div>
+            <pre class="text-xs leading-relaxed p-4 m-0 overflow-x-auto"><code class="text-paper-bg dark:text-terminal-fg">#!/usr/bin/env bash
+# ==============================================================================
+# SLURM PRODUCTION SCRIPT // REAL-TIME FCIQMC DYNAMICS SWEEP
+# Joachim Brand Lab // Massey University Auckland
+# ==============================================================================
+#SBATCH --job-name=fciqmc_sweep
+#SBATCH --partition=parallel
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=32
+#SBATCH --cpus-per-task=1
+#SBATCH --time=48:00:00
+#SBATCH --mem=128G
+#SBATCH --array=1-100%20
+#SBATCH --output=/nesi/nobackup/massey_phys/logs/%x_%A_%a.out
+#SBATCH --error=/nesi/nobackup/massey_phys/logs/%x_%A_%a.err
+
+module purge
+module load Julia/1.10.2-GCC-12.3.0
+module load OpenMPI/4.1.5-GCC-12.3.0
+
+export JULIA_NUM_THREADS=32
+export OPENBLAS_NUM_THREADS=32
+
+PARAM_FILE="config/sweep_parameters.csv"
+LINE=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "$PARAM_FILE")
+IFS=',' read -r RUN_ID G_COUPLING N_WALKERS DT T_MAX &lt;&lt;&lt; "$LINE"
+
+echo "=========================================================="
+echo "LAUNCHING TASK $SLURM_ARRAY_TASK_ID on $(hostname)"
+echo "PARAMETERS: G=$G_COUPLING, WALKERS=$N_WALKERS, DT=$DT, T_MAX=$T_MAX"
+echo "=========================================================="
+
+srun julia --project=@. scripts/run_realtime_fciqmc.jl \
+    --coupling "$G_COUPLING" \
+    --walkers "$N_WALKERS" \
+    --dt "$DT" \
+    --tmax "$T_MAX" \
+    --outdir "/nesi/nobackup/massey_phys/data/run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+
+echo "TASK $SLURM_ARRAY_TASK_ID COMPLETED AT $(date -u '+%Y-%m-%dT%H:%M:%SZ')"</code></pre>
+          </div>
+
+          <div class="border-t border-paper-pencil dark:border-terminal-wire pt-4 text-xs font-mono">
+            <div class="font-bold text-paper-red dark:text-terminal-amber mb-2">AUTOMATED ARTIFACT CACHING VIA SSH JUMP PROXY:</div>
+            <p class="text-paper-margin dark:text-terminal-muted leading-relaxed mb-3">
+              To securely retrieve HDF5 / JLD2 simulation artifacts from remote Massey/NeSI supercomputers directly to local Neovim/Julia buffers without manual scp commands:
+            </p>
+            <div class="p-3 bg-paper-subtle dark:bg-terminal-subtle border border-paper-pencil dark:border-terminal-wire text-[11px] overflow-x-auto">
+              <code>rsync -avz -e "ssh -J gateway.massey.ac.nz" node01:/nesi/nobackup/massey_phys/data/ ./scratch/artifacts/</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle py-8 text-xs font-mono">
+      <div class="site-container flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        <div>
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg tracking-typewriter mb-1">
+            MASSEY UNIVERSITY THEORETICAL &amp; COMPUTATIONAL PHYSICS LAB
+          </div>
+          <div class="text-paper-margin dark:text-terminal-muted leading-relaxed">
+            School of Natural Sciences &bull; Prof. Joachim Brand Research Group<br />
+            Massey University Albany Campus, Private Bag 102 904, Auckland 0745, New Zealand.<br />
+            Primary: <a href="mailto:j.nath@massey.ac.nz">j.nath@massey.ac.nz</a> &bull; PGP: <span class="text-paper-red dark:text-terminal-amber">4B8F 921A 7C30 E15F 8892 B0D4 319C F082 E8A1 99D1</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5 md:text-right">
+          <div class="font-bold text-paper-carbon dark:text-terminal-fg">INDEX NETWORK</div>
+          <div class="flex flex-wrap md:justify-end gap-3">
+            <a href="https://github.com/jyotiraj-code" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://orcid.org/0009-0005-4705-7798" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="text-[11px] text-paper-margin dark:text-terminal-muted mt-2">
+            STATION ARCHIVE &bull; NO TELEMETRY &bull; REVISION FFE919F
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- COMMAND PALETTE MODAL -->
+    <div id="cmdPaletteBackdrop" class="cmd-backdrop hidden no-print" aria-modal="true" role="dialog">
+      <div class="cmd-modal">
+        <div class="flex items-center justify-between px-4 py-2 bg-paper-subtle dark:bg-terminal-subtle border-b border-paper-pencil dark:border-terminal-wire text-xs font-mono">
+          <div class="font-bold flex items-center gap-2">
+            <span class="text-paper-red dark:text-terminal-amber">CATALOG DISPATCH</span>
+            <span class="opacity-50">//</span>
+            <span>INDEX SEARCH</span>
+          </div>
+          <div class="opacity-60">[ESC TO EXIT]</div>
+        </div>
+        
+        <input
+          type="text"
+          id="cmdPaletteInput"
+          class="cmd-input font-mono"
+          placeholder="Type a domain, paper title, Julia module, or essay topic..."
+          autocomplete="off"
+        />
+
+        <div id="cmdPaletteResults" class="cmd-results font-mono"></div>
+
+        <div class="px-4 py-2 border-t border-paper-pencil dark:border-terminal-wire bg-paper-subtle dark:bg-terminal-subtle flex items-center justify-between text-[11px] font-mono text-paper-margin dark:text-terminal-muted">
+          <div>↑↓ TO NAVIGATE &bull; ENTER TO RETRIEVE</div>
+          <div>SEARCHING 18+ ARCHIVAL ENTRIES</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js" defer></script>
+    <script src="/js/sitemap-graph.js" defer></script>
+  </body>
+</html>
+
