@@ -1,0 +1,13 @@
+# GitHub Pages Jekyll Configuration
+# Tells Jekyll to ignore source files and build tools
+exclude:
+  - src/
+  - .github/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - astro.config.mjs
+  - tailwind.config.mjs
+  - tsconfig.json
+  - README.md
+
