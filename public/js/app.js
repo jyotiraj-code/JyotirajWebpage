@@ -118,8 +118,14 @@
   async function loadSearchIndex() {
     if (searchIndex) return searchIndex;
     
+    const repoBase = window.location.pathname.includes('/JyotirajWebpage') ? '/JyotirajWebpage' : '';
     // Try multiple paths to ensure resolution on root, subfolder, or file://
-    const possiblePaths = ['/search-index.json', 'search-index.json', '../search-index.json'];
+    const possiblePaths = [
+      repoBase + '/search-index.json',
+      '/search-index.json',
+      'search-index.json',
+      '../search-index.json'
+    ];
     for (const p of possiblePaths) {
       try {
         const res = await fetch(p);
@@ -230,7 +236,9 @@
 
       filtered.forEach((item, index) => {
         const itemEl = document.createElement('a');
-        itemEl.href = item.url;
+        const repoBase = window.location.pathname.includes('/JyotirajWebpage') ? '/JyotirajWebpage' : '';
+        const targetUrl = (item.url.startsWith('/') && repoBase) ? (repoBase + item.url) : item.url;
+        itemEl.href = targetUrl;
         itemEl.className = 'cmd-item';
         itemEl.innerHTML = `
           <div class="flex items-center justify-between">

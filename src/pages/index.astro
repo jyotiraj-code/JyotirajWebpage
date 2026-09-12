@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AssameseJaapiMandala from '../components/AssameseJaapiMandala.astro';
+
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 ---
 
 <Layout title="Dossier & Executive Ledger" currentPath="/">
@@ -34,10 +36,10 @@ import AssameseJaapiMandala from '../components/AssameseJaapiMandala.astro';
         </div>
 
         <div class="mt-8 flex flex-wrap gap-2">
-          <a href="/research/" class="btn-brutalist">
+          <a href={`${base}/research/`} class="btn-brutalist">
             [02/RESEARCH DOSSIER] ➔
           </a>
-          <a href="/code/" class="btn-brutalist">
+          <a href={`${base}/code/`} class="btn-brutalist">
             [03/JULIA MACHINERY] ➔
           </a>
           <a href="#terminal" class="btn-brutalist">

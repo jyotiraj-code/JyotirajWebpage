@@ -61,18 +61,19 @@
       }
     });
 
-    // Detect current route
-    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    // Detect repository base and current route
+    const repoBase = window.location.pathname.includes('/JyotirajWebpage') ? '/JyotirajWebpage' : '';
+    const cleanPath = window.location.pathname.replace(repoBase, '').replace(/\/$/, '') || '/';
 
     // Node definitions
     const NODES = [
-      { id: '01', name: 'DOSSIER', label: '01/DOSSIER', url: '/', path: '/', desc: 'Coordinates & Academic Dossier', isCenter: true },
-      { id: '02', name: 'RESEARCH', label: '02/RESEARCH', url: '/research/', path: '/research', desc: 'BECs, Solitons & FCIQMC' },
-      { id: '03', name: 'CODE', label: '03/CODE', url: '/code/', path: '/code', desc: 'Julia Ecosystem & Slurm' },
-      { id: '04', name: 'LEDGER', label: '04/LEDGER', url: '/learnings/', path: '/learnings', desc: 'Mathematical Changelog' },
-      { id: '05', name: 'ESSAYS', label: '05/ESSAYS', url: '/essays/', path: '/essays', desc: 'Unfiltered Editorial Essays' },
-      { id: '06', name: 'ARCHIVE', label: '06/ARCHIVE', url: '/archive/', path: '/archive', desc: 'Poetry, Acoustics & Terrain' },
-      { id: '07', name: 'COLOPHON', label: '07/COLOPHON', url: '/colophon/', path: '/colophon', desc: 'M2 Air & System Manifesto' }
+      { id: '01', name: 'DOSSIER', label: '01/DOSSIER', url: repoBase + '/', path: '/', desc: 'Coordinates & Academic Dossier', isCenter: true },
+      { id: '02', name: 'RESEARCH', label: '02/RESEARCH', url: repoBase + '/research/', path: '/research', desc: 'BECs, Solitons & FCIQMC' },
+      { id: '03', name: 'CODE', label: '03/CODE', url: repoBase + '/code/', path: '/code', desc: 'Julia Ecosystem & Slurm' },
+      { id: '04', name: 'LEDGER', label: '04/LEDGER', url: repoBase + '/learnings/', path: '/learnings', desc: 'Mathematical Changelog' },
+      { id: '05', name: 'ESSAYS', label: '05/ESSAYS', url: repoBase + '/essays/', path: '/essays', desc: 'Unfiltered Editorial Essays' },
+      { id: '06', name: 'ARCHIVE', label: '06/ARCHIVE', url: repoBase + '/archive/', path: '/archive', desc: 'Poetry, Acoustics & Terrain' },
+      { id: '07', name: 'COLOPHON', label: '07/COLOPHON', url: repoBase + '/colophon/', path: '/colophon', desc: 'M2 Air & System Manifesto' }
     ];
 
     // Edges between nodes
@@ -100,8 +101,8 @@
     const radius = 78;
 
     NODES.forEach((node, i) => {
-      node.isActive = (node.path === '/' && (currentPath === '/' || currentPath === '')) ||
-                      (node.path !== '/' && currentPath.startsWith(node.path));
+      node.isActive = (node.path === '/' && (cleanPath === '/' || cleanPath === '')) ||
+                      (node.path !== '/' && cleanPath.startsWith(node.path));
       if (node.isCenter) {
         node.baseX = centerX;
         node.baseY = centerY;
@@ -280,3 +281,4 @@
     requestAnimationFrame(animate);
   });
 })();
+

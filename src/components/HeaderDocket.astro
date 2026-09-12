@@ -4,21 +4,25 @@ interface Props {
 }
 
 const { currentPath = '/' } = Astro.props;
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
 const tabs = [
-  { id: '01', name: 'DOSSIER', href: '/' },
-  { id: '02', name: 'RESEARCH', href: '/research/' },
-  { id: '03', name: 'COMPUTATION', href: '/code/' },
-  { id: '04', name: 'LEDGER', href: '/learnings/' },
-  { id: '05', name: 'ESSAYS', href: '/essays/' },
-  { id: '06', name: 'ARCHIVE', href: '/archive/' },
-  { id: '07', name: 'COLOPHON', href: '/colophon/' },
+  { id: '01', name: 'DOSSIER', href: `${base}/` },
+  { id: '02', name: 'RESEARCH', href: `${base}/research/` },
+  { id: '03', name: 'COMPUTATION', href: `${base}/code/` },
+  { id: '04', name: 'LEDGER', href: `${base}/learnings/` },
+  { id: '05', name: 'ESSAYS', href: `${base}/essays/` },
+  { id: '06', name: 'ARCHIVE', href: `${base}/archive/` },
+  { id: '07', name: 'COLOPHON', href: `${base}/colophon/` },
 ];
 
 const isActive = (href: string) => {
-  if (href === '/' && (currentPath === '/' || currentPath === '')) return true;
-  if (href !== '/' && currentPath.startsWith(href)) return true;
-  return false;
+  const cleanPath = currentPath.replace(/\/$/, '') || '/';
+  const cleanHref = href.replace(/\/$/, '') || '/';
+  if (cleanHref === base || cleanHref === `${base}/` || cleanHref === '/') {
+    return cleanPath === base || cleanPath === `${base}/` || cleanPath === '/';
+  }
+  return cleanPath.startsWith(cleanHref);
 };
 ---
 
