@@ -5,8 +5,8 @@ const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jyotiraj-code.github.io',
-  base: process.env.BASE_PATH || (isGitHubActions && !process.env.CUSTOM_DOMAIN ? '/JyotirajWebpage' : '/'),
+  site: 'https://jyotiraj.dev',
+  base: '/',
   trailingSlash: 'always',
   integrations: [tailwind({
     applyBaseStyles: false,
